@@ -24,8 +24,8 @@
         </div>
 
         <nav>
-            <a href="#">Men</a>
-            <a href="#">Women</a>
+            <a href="{% url 'clothes:clothes_by_gender' 'M' %}">Men</a>
+            <a href="{% url 'clothes:clothes_by_gender' 'W' %}">Women</a>
             <a href="#">About</a>
         </nav>
 
