@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'home/css/base_layout.css' %}">
+</head>
+<body>
+    <header>
+        <div class='logo'>
+            <img src="{% static 'home/images/logo.png' %}" alt="" width="75px">
+        </div>
+        <div class="search-bar">
+            <form action="">
+                <input type="text" name='search-bar' placeholder='search'>
+                <input type="submit">
+            </form>
+        </div>
+
+        <nav>
+            <a href="#">Men</a>
+            <a href="#">Women</a>
+            <a href="#">About</a>
+        </nav>
+
+        <div>
+            <a href="#">login</a>
+            <a href="#">cart</a>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock content %}
+    
+
+</body>
+</html>
