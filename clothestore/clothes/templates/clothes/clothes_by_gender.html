@@ -9,8 +9,11 @@
 <div class="filters">
     <span>filter by</span>
     <select name="filter" value="filter">
+        <option value="{% url 'clothes:clothes_by_gender' gender %}">no filters</option>
         {% for type in type_clothing %}
-            <option value={{ type.name }}>{{ type.name }}</option>
+            <option value="{% url 'clothes:clothes_by_gender' gender %}?filter={{ type.name }}">
+                {{type.name}}
+            </option>
         {% endfor %}
     </select>
 </div>

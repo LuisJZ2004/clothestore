@@ -7,8 +7,13 @@ from .models import ClothingType, Pledge
 def clothes_by_gender(request, gender):
     clothes = Pledge.objects.filter(gender__in=gender)
     typeclothing = ClothingType.objects.filter(gender__in=gender)
+    filter = request.GET.get("filter")
+
+    if filter:
+        clothes = Pledge.objects.filter(gender__in=gender, clothing_type__slug = filter)
 
     context = {
+        'gender': gender,
         'pledges': clothes,
         'type_clothing': typeclothing
     }
