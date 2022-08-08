@@ -1,0 +1,17 @@
+{% extends '../home/base_layout.html' %}
+
+{% block content %}
+
+<div class="list-clothes">
+    {% for pledge in pledges %}
+
+    <div class="clothe">
+        <img src={{ pledge.image.url }} alt="" width="80px">
+        <h3> {{ pledge.name }} </h3>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock content %}
+
