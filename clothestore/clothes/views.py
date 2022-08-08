@@ -6,9 +6,11 @@ from .models import ClothingType, Pledge
 
 def clothes_by_gender(request, gender):
     clothes = Pledge.objects.filter(gender__in=gender)
+    typeclothing = ClothingType.objects.filter(gender__in=gender)
 
     context = {
-        'pledges': clothes
+        'pledges': clothes,
+        'type_clothing': typeclothing
     }
 
     return render(

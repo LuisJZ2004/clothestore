@@ -1,13 +1,28 @@
 {% extends '../home/base_layout.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'clothes/css/clothes_by_gender.css' %}">
+{% endblock styles %}
 
 {% block content %}
+
+<div class="filters">
+    <span>filter by</span>
+    <select name="filter" value="filter">
+        {% for type in type_clothing %}
+            <option value={{ type.name }}>{{ type.name }}</option>
+        {% endfor %}
+    </select>
+</div>
 
 <div class="list-clothes">
     {% for pledge in pledges %}
 
     <div class="clothe">
-        <img src={{ pledge.image.url }} alt="" width="80px">
-        <h3> {{ pledge.name }} </h3>
+        <img src={{ pledge.image.url }} alt="" width="150px">
+        <br>
+        <a href="#">{{ pledge.name }}</a>
+        
     </div>
 
     {% endfor %}

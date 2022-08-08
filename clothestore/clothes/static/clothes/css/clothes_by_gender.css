@@ -1,0 +1,18 @@
+.list-clothes {
+    display: flex;
+    padding: 15px;
+    border: 1px solid black;
+    min-width: 500px;
+    max-width: 1200px;
+    
+}
+
+.clothe {
+    display: flex;
+    border: 1px solid black;
+}
+
+.filters {
+    margin-left: 50px
+}
+
