@@ -1,21 +1,32 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'clothes/css/clothes_by_gender.css' %}">
+<link rel="stylesheet" href="{% static 'clothes/css/clothes.css' %}">
 {% endblock styles %}
 
 {% block content %}
 
 <div class="filters">
-    <span>filter by</span>
-    <select name="filter" value="filter" onchange="window.location.href=this.value;">
-        <option value="{% url 'clothes:clothes_by_gender' gender %}">no filters</option>
-        {% for type in type_clothing %}
-            <option value="{% url 'clothes:clothes_by_gender' gender %}?filter={{ type.slug }}">
-                {{type.name}}
-            </option>
-        {% endfor %}
-    </select>
+    <div class="filter-by-type">
+        <span>filter by</span>
+        <select name="filter" value="filter" onchange="window.location.href=this.value;">
+            <option value=""></option>
+            <option value="{% url 'clothes:clothes_by_gender' gender %}">no filters</option>
+            {% for type in type_clothing %}
+                <option value="{% url 'clothes:clothes_by_gender' gender %}?filter={{ type.slug }}">
+                    {{type.name}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="filter-by-order">
+        <span>order by</span>
+        <select name="order" onchange="window.location.href=this.value;">
+            <option value=""></option>            
+            <option value="{% url 'clothes:clothes_by_gender' gender %}">no order</option>
+        </select>
+    </div>
 </div>
 
 <div class="list-clothes">

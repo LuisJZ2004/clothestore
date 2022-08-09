@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 10px;
+    min-width: 100px;
+    max-width: 1300px;
+    margin: 0px auto;
+}
+
+
+.list-clothes {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 15px;
+    border: 1px solid black;
+    min-width: 500px;
+    max-width: 1200px;
+    margin: 0px auto;
+    margin-top: 10px;
+}
+
+.clothe {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
