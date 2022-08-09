@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
 
 # Create your models here.
@@ -38,6 +39,7 @@ class Pledge(models.Model):
         ('M','Man'),
         ('W', 'Woman'),
     ), max_length=10, blank=False)
+    pub_date = models.DateField(default=timezone.now())
     image = models.ImageField()
     price = models.FloatField(default=0.99, blank=False)
     description = models.TextField(max_length=300, blank=False, null=True)

@@ -5,6 +5,17 @@ from .models import ClothingType, Pledge
 # Create your views here.
 
 def clothes_by_gender(request, gender):
+    """
+    Shows all the clothes belonging to a gender.
+    It can do filters by the type of clothing and odering by name or publish date
+     
+    Obligatory parameters:
+    - gender: the gender of the clothes.
+
+    Optional parameters:
+    - filter: the clothing type to filter.
+    - order: the order in which the products will be shown 
+    """
     clothes = Pledge.objects.filter(gender__in=gender)
     typeclothing = ClothingType.objects.filter(gender__in=gender)
     filter = request.GET.get("filter")
