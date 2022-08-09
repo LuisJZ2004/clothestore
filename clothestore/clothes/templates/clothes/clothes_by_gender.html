@@ -41,7 +41,7 @@
                 <option value="{% url 'clothes:clothes_by_gender' gender %}">no order</option>
             {% endif %}
 
-            {% for each_order in orders %}
+            {% for each_order in orders.keys %}
                 {% if filter %}
                     <option value="{% url 'clothes:clothes_by_gender' gender %}?order={{ each_order }}&filter={{ filter }}">
                         {{each_order}}
