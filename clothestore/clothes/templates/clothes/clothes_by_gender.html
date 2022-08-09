@@ -11,11 +11,22 @@
         <span>filter by</span>
         <select name="filter" value="filter" onchange="window.location.href=this.value;">
             <option value=""></option>
-            <option value="{% url 'clothes:clothes_by_gender' gender %}">no filters</option>
+            {% if order %}
+                <option value="{% url 'clothes:clothes_by_gender' gender %}?order={{order}}">no filters</option>
+            {% else %}
+                <option value="{% url 'clothes:clothes_by_gender' gender %}">no filters</option>
+            {% endif %}
             {% for type in type_clothing %}
-                <option value="{% url 'clothes:clothes_by_gender' gender %}?filter={{ type.slug }}">
-                    {{type.name}}
-                </option>
+                {% if order %}
+                    <option value="{% url 'clothes:clothes_by_gender' gender %}?order={{ order }}&filter={{ type.slug }}">
+                        {{type.name}}
+                    </option>
+                {% else %}
+                    <option value="{% url 'clothes:clothes_by_gender' gender %}?filter={{ type.slug }}">
+                        {{type.name}}
+                    </option>
+                {% endif %}
+                    
             {% endfor %}
         </select>
     </div>
@@ -23,8 +34,24 @@
     <div class="filter-by-order">
         <span>order by</span>
         <select name="order" onchange="window.location.href=this.value;">
-            <option value=""></option>            
-            <option value="{% url 'clothes:clothes_by_gender' gender %}">no order</option>
+            <option value=""></option>     
+            {% if filter %}
+                <option value="{% url 'clothes:clothes_by_gender' gender %}?filter={{ filter }}">no order</option>
+            {% else %}
+                <option value="{% url 'clothes:clothes_by_gender' gender %}">no order</option>
+            {% endif %}
+
+            {% for each_order in orders %}
+                {% if filter %}
+                    <option value="{% url 'clothes:clothes_by_gender' gender %}?order={{ each_order }}&filter={{ filter }}">
+                        {{each_order}}
+                    </option>
+                {% else %}
+                    <option value="{% url 'clothes:clothes_by_gender' gender %}?order={{ each_order }}">
+                        {{each_order}}
+                    </option>
+                {% endif %}
+            {% endfor %}
         </select>
     </div>
 </div>
@@ -41,6 +68,5 @@
 
     {% endfor %}
 </div>
-
 {% endblock content %}
 
