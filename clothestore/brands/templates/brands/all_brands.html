@@ -1,0 +1,25 @@
+{% extends '../home/base_layout.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'brands/css/all_brands.css' %}">
+{% endblock styles %}
+
+
+
+{% block content %}
+<div class="container">
+    <h1>Brands</h1>
+
+    <div class="brands">
+        {% for brand in brands %}
+            <div class="each-brand">
+                <img src="{{ brand.image.url }}" width="220px">
+                <a href="#" >
+                    {{ brand.name }}
+                </a>
+            </div>
+            
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

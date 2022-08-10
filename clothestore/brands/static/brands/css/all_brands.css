@@ -1,0 +1,36 @@
+.container {
+    border: 1px solid black;
+    padding: 20px;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 3.5rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container .brands {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.container .brands .each-brand {
+    border: 1px solid black;
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+}
+.container .brands .each-brand img{
+    align-self: center;
+}
+.container .brands .each-brand a {
+    text-align: center;
+    font-size: 2.3rem;
+    text-decoration: none;
+}
