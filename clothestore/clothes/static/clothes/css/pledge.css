@@ -1,0 +1,51 @@
+.pledge {
+    display: flex;
+    flex-direction: column;
+}
+
+.pledge .tittle {
+    padding: 10px;
+    font-size: 3.0rem;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.pledge .pledge-info {
+    display: flex;
+    border: 1px solid black;
+    padding: 20px;
+    min-width: 700px;
+    max-width: 1100px;
+}
+
+.pledge figure {
+    border: 1px solid black;
+    width: 550px;
+    height: 670px;
+}
+
+.pledge ul {
+    margin: 0 auto;
+    list-style: none;
+}
+
+.pledge ul li {
+    font-size: 2.5rem;
+
+}
+
+.pledge ul li a {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+
+.pledge .pledge-description {
+    border: 1px solid black;
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+.pledge .pledge-description p {
+    font-size: 2.0rem;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}

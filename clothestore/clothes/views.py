@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import DetailView, ListView
 from .models import ClothingType, Pledge
 
 # Create your views here.
@@ -51,3 +51,10 @@ def clothes_by_gender(request, gender):
         context=context,
         template_name="clothes/clothes_by_gender.html",
     )
+
+class ShowPledge(DetailView):
+    model = Pledge
+    template_name = "clothes/pledge.html"
+
+    def get_object(self):
+        return get_object_or_404(self.model, pk=self.kwargs.get('pk'))
