@@ -1,0 +1,48 @@
+.container {
+    border: 1px solid black;
+    max-width: 1270px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.container .brand-info {
+    border: 1px solid black;
+    width: 262px;
+    margin: 0 auto;
+}
+
+.container .brand-info h1 {
+    text-align: center;
+    font-size: 2.8rem;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container .brand-products-container {
+    border: 1px solid black;
+    margin-top: 20px;
+}
+
+.container .brand-products-container h2 {
+    font-size: 2.1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+}
+
+.container .brand-products-container .brand-products {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.container .brand-products-container .brand-products .each-product {
+    border: 1px solid black;
+    max-width: 180px;
+    margin-bottom: 10px;
+}
+
+.container .brand-products-container .brand-products .each-product {
+    font-size: 1.5rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+}

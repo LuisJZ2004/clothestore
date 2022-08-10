@@ -14,7 +14,7 @@
         {% for brand in brands %}
             <div class="each-brand">
                 <img src="{{ brand.image.url }}" width="220px">
-                <a href="#" >
+                <a href="{% url 'brands:show_brand' brand.slug %}" >
                     {{ brand.name }}
                 </a>
             </div>

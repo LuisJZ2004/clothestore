@@ -21,7 +21,7 @@
 .pledge figure {
     border: 1px solid black;
     width: 550px;
-    height: 670px;
+    min-height: 670px;
 }
 
 .pledge ul {

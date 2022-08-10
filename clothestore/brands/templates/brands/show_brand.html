@@ -1,0 +1,35 @@
+{% extends '../home/base_layout.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'brands/css/show_brand.css' %}">
+{% endblock styles %}
+
+{% block content %}
+<div class="container">
+    <div class="brand-info">
+        <img src="{{ brand.image.url }}" width="260px">
+        <h1>{{ brand.name }}</h1>
+    </div>
+
+    
+        <div class="brand-products-container">
+            {% if brand.pledge_set.all %}
+                <h2>Lastest of {{ brand.name }}</h2>
+
+                <div class="brand-products">
+                    {% for product in brand.pledge_set.all %}
+                        <div class="each-product">
+                            <img src="{{ product.image.url }}" alt="" width="160px">
+                            <a href="{% url 'clothes:show_pledge' product.pk %}">{{ product.name }}</a>
+                        </div>               
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h2>There's nothing of {{ brand.name }} yet</h2>
+            {% endif %}
+        </div>
+
+</div>
+{% endblock content %}
+
