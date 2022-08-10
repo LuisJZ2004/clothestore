@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'clothes/css/clothes.css' %}">
+<link rel="stylesheet" href="{% static 'clothes/css/clothes_gender.css' %}" type="text/css">
 {% endblock styles %}
 
 {% block content %}
@@ -30,7 +30,15 @@
             {% endfor %}
         </select>
     </div>
-    
+
+    {% if filter or order %}
+        <div class="clear-filters">
+            <h2>
+                <a href="{% url 'clothes:clothes_by_gender' gender %}">Clear Filters</a>
+            </h2>
+        </div>
+    {% endif %}
+
     <div class="filter-by-order">
         <span>order by</span>
         <select name="order" onchange="window.location.href=this.value;">
