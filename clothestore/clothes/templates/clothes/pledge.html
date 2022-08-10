@@ -1,0 +1,43 @@
+{% extends '../home/base_layout.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'clothes/css/pledge.css' %}">
+{% endblock styles %}
+
+{% block content %}
+<div class='pledge'>
+    <div class='tittle'>
+        <h3>{{ pledge.name }}</h3>
+    </div>
+
+    <div class="pledge-info">
+        <figure>
+            <img src="{{ pledge.image.url }}" width='500px'>
+        </figure>
+        <ul>
+            <li>brand: <a href="#">{{ pledge.brand.name }}</a> </li>
+            <li>type: <a href="">{{ pledge.clothing_type.name }}</a></li>
+            <li>gender: <a href="">{{ pledge.gender }}</a></li>
+            <li>added date: {{ pledge.pub_date }}</li>
+            <li>price: {{ pledge.price }}$</li>
+            <li>
+                <div class="pledge-description">
+                    <p>{{ pledge.description }}</p>
+                </div>
+            </li>
+            <li>
+                <form action="">
+                    {% csrf_token %}
+                    <button type="submit">Add to cart</button>
+                </form>
+            </li>
+        </ul>
+        
+    </div>
+    {% comment %} <div class="pledge-description">
+        <p>{{ pledge.description }}</p>
+    </div> {% endcomment %}
+
+    
+</div>
+{% endblock content %}
