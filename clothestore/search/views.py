@@ -22,7 +22,8 @@ def search_object(request):
 
     context = {
         'search': search,
-        'pledges': pledges, 
+        'pledges': pledges,
+        'brands': brands,
     }
 
     return render(
