@@ -1,14 +1,18 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
+<link rel="stylesheet" href="{% static 'search/css/search_styles.css' %}" type="text/css">
 {% endblock styles %}
 
 {% block content %}
     <div class='container'>
+        <div class="tittle">
+            <h1>Results of "{{ search }}"</h1>
+        </div>
         {% for pledge in pledges %}
             <div class='product'>
                 <span>
-                    <img src="{{ pledge.image.url }}" alt="" width="100px">
+                    <img src="{{ pledge.image.url }}" alt="" width="200px">
                 </span>
                 <a href="{% url 'clothes:show_pledge' pledge.pk %}">
                     {{pledge.name}}

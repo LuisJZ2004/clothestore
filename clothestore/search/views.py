@@ -21,6 +21,7 @@ def search_object(request):
         return redirect(to="home:home_page")
 
     context = {
+        'search': search,
         'pledges': pledges, 
     }
 
