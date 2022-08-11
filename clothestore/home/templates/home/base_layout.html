@@ -17,8 +17,8 @@
             <img src="{% static 'home/images/logo.png' %}" alt="" width="75px">
         </div>
         <div class="search-bar">
-            <form action="">
-                <input type="text" name='search-bar' placeholder='search'>
+            <form action="{% url 'search:search_object' %}">
+                <input type="search" name='search-bar' placeholder='search'>
                 <input type="submit">
             </form>
         </div>

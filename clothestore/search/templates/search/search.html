@@ -1,0 +1,20 @@
+{% extends '../home/base_layout.html' %}
+{% load static %}
+{% block styles %}
+{% endblock styles %}
+
+{% block content %}
+    <div class='container'>
+        {% for pledge in pledges %}
+            <div class='product'>
+                <span>
+                    <img src="{{ pledge.image.url }}" alt="" width="100px">
+                </span>
+                <a href="{% url 'clothes:show_pledge' pledge.pk %}">
+                    {{pledge.name}}
+                </a>
+            </div>
+                
+        {% endfor %}
+    </div>
+{% endblock content %}
