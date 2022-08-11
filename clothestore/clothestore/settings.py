@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'clothes.apps.ClothesConfig',
     'brands.apps.BrandsConfig',
+    'search.apps.SearchConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
