@@ -10,7 +10,7 @@ def sign_in(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(to="home:home_page")
+            return redirect(to="accounts:login")
     else:
         form = UserRegisterForm()
 
