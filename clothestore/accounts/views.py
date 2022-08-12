@@ -1,11 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from .forms import UserRegisterForm
 
 # Create your views here.
 
 def sign_in(request):
-    context = {}
+
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(to="home:home_page")
+    else:
+        form = UserRegisterForm()
+
+    context = {
+        'form': form,
+    }
     return render(
         request=request,
-        template_name=None,
+        template_name="accounts/sign_in.html",
         context=context
     )

@@ -1,0 +1,33 @@
+{% extends '../home/base_layout.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'accounts/css/sign_in.css' %}">
+{% endblock styles %}
+
+{% block content %}
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active"> Sign In </h2>
+      
+      <!-- Login Form -->
+      <form method="POST">
+        {% csrf_token %}
+        {% comment %} <input type="text" id="login" class="fadeIn second" name="login" placeholder="login"> {% endcomment %}
+        
+        {{form.first_name}}
+        {{form.last_name}}
+        {{form.username}}
+        {{form.email}}
+        <br>
+        <label for="password1-id">password 1</label>
+        {{form.password1}}
+        <br>
+        <label for="password2-id">password 2</label>
+        {{form.password2}}
+        <input type="submit" class="fadeIn fourth" value="Sign In", id="register-buttom">
+      </form>
+  
+    </div>
+  </div>
+{% endblock content %}
