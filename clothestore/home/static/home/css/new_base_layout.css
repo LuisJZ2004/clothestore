@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #0d5254;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2.3rem;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    background-color: rgb(5 177 157);
+}
+
+nav a {
+    color: #094a54;
+}
+
+nav a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.accounts a{
+    color: #094a54;
+}
+.accounts a:hover {
+    color: rgb(255, 255, 255);
+}
+/* search bar */
+
+.search_bar {
+    height: 3.0rem;
+    border-radius: 50px;
+}
