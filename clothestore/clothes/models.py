@@ -35,5 +35,13 @@ class Pledge(models.Model):
     price = models.FloatField(default=0.99, blank=False)
     description = models.TextField(max_length=300, blank=False, null=True)
 
+    size = models.ManyToManyField(to="Size")
+
+    def __str__(self) -> str:
+        return self.name
+
+class Size(models.Model):
+    name = models.CharField(max_length=3)
+
     def __str__(self) -> str:
         return self.name
