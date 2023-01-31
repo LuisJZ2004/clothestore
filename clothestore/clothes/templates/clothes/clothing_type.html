@@ -1,0 +1,16 @@
+{% extends '../home/base_layout.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static '' %}" type="text/css">
+{% endblock styles %}
+{% block content %}
+    <div class="main-content">
+        {% for clothing_type in clothing_types %}
+            <div class="clothing-type">
+                <img src={{ clothing_type.image.url }} width="230px">
+                <a href="#">{{clothing_type.name}}</a>
+                {% comment %} {% url 'clothes:' %} {% endcomment %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

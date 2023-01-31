@@ -9,6 +9,7 @@ from brands.models import Brand
 class ClothingType(models.Model):
     name = models.CharField(max_length=25, blank=False, unique=True)
     slug = models.SlugField(editable=False)
+    image = models.ImageField(null=False)
     gender = models.CharField(choices= (
         ('M','Man'),
         ('W', 'Woman'),

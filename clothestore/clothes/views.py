@@ -1,8 +1,23 @@
 from django.shortcuts import get_object_or_404, render
+from django.http import Http404
 from django.views.generic import DetailView, ListView
 from .models import ClothingType, Pledge
 
 # Create your views here.
+
+class ClothingTypeView(ListView):
+    model=ClothingType
+    template_name="clothes/clothing_type.html"
+    context_object_name="clothing_types"
+
+    def get_queryset(self):
+        query_set = self.model.objects.filter(gender=self.kwargs["gender"])
+        if query_set:
+            return query_set
+        
+        raise Http404()
+            
+    
 
 def clothes_by_gender(request, gender):
     """
