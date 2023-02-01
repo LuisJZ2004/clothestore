@@ -1,0 +1,46 @@
+.main-div {
+    padding: 20px;
+    /* border: 2px solid black; */
+}
+
+.main-content {
+    /* border: 2px solid black; */
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.clothing-type {
+    border: 2px solid black;
+    max-width: 290px;
+    margin-bottom: 10px;
+    padding:10px;
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+}
+
+.clothing-type .name {
+    /* border: 2px solid black; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.clothing-type .name a {
+    color: #bbcbe3;
+    font-size: 2.2rem;
+    font-family: monospace;
+}
+
+.clothing-type .name a:hover {
+    color: white
+}
