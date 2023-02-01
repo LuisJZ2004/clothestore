@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div class="filters">
+{% comment %} <div class="filters">
     <div class="filter-by-type">
         <span>filter by</span>
         <select name="filter" value="filter" onchange="window.location.href=this.value;">
@@ -37,9 +37,9 @@
                 <a href="{% url 'clothes:clothes_by_gender' gender %}">Clear Filters</a>
             </h2>
         </div>
-    {% endif %}
+    {% endif %} {% endcomment %}
 
-    <div class="filter-by-order">
+    {% comment %} <div class="filter-by-order">
         <span>order by</span>
         <select name="order" onchange="window.location.href=this.value;">
             <option value=""></option>     
@@ -62,13 +62,12 @@
             {% endfor %}
         </select>
     </div>
-</div>
+</div> {% endcomment %}
 
 <div class="list-clothes">
     {% for pledge in pledges %}
 
     <div class="clothe">
-        <img src={{ pledge.image.url }} alt="" width="150px">
         <br>
         <a href="#">{{ pledge.name }}</a>
         

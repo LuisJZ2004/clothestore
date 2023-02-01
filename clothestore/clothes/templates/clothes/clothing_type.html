@@ -8,12 +8,14 @@
         <div class="main-content">
             {% for clothing_type in clothing_types %}
                 <div class="clothing-type">
-                    <a href="#">
+                    <a href="{% url 'clothes:pledge_list_path' clothing_type.gender clothing_type.slug %}">
                         <img src={{ clothing_type.image.url }} width="270px">
                     </a>
                         
                     <div class="name">   
-                        <a href="#">{{clothing_type.name}}</a>
+                        <a href="{% url 'clothes:pledge_list_path' clothing_type.gender clothing_type.slug %}">
+                            {{clothing_type.name}}
+                        </a>
                     </div> 
                     {% comment %} {% url 'clothes:' %} {% endcomment %}
                 </div>

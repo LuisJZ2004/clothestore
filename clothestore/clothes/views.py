@@ -18,6 +18,16 @@ class ClothingTypeView(ListView):
         raise Http404()
             
     
+def clothes_list_view(request, gender, slug):
+    pledges = Pledge.objects.filter(clothing_type__slug=slug, gender=gender)
+    
+    return render(
+        request=request,
+        template_name="clothes/clothes_list.html",
+        context={
+            "pledges": pledges
+        }
+    )
 
 def clothes_by_gender(request, gender):
     """
