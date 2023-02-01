@@ -1,0 +1,51 @@
+/* .filters {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 10px;
+    min-width: 100px;
+    max-width: 1300px;
+    margin: 0px auto;
+} */
+
+
+.list-clothes {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 15px;
+    border: 2px solid black;
+    min-width: 500px;
+    max-width: 1200px;
+    margin: 0px auto;
+    margin-top: 10px;
+}
+
+.clothe {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid black;
+}
+.clothe .name {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-width: 90%;    
+    margin-top:5px;
+}
+
+.clothe .name a{
+    font-family: monospace;
+    font-size: 1.6rem;
+    color: #bbcbe3;
+}
+
+.clothe .name a:hover {
+    color:white;
+}

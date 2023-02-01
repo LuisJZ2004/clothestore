@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'clothes/css/clothes_gender.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_2.css' %}" type="text/css">
 {% endblock styles %}
 
 {% block content %}
@@ -68,8 +68,12 @@
     {% for pledge in pledges %}
 
     <div class="clothe">
-        <br>
-        <a href="#">{{ pledge.name }}</a>
+        <a href="#">
+            <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" alt="" width="240px">
+        </a>
+        <div class="name">
+            <a href="#">{{ pledge.name }}</a>
+        </div>
         
     </div>
 
@@ -77,3 +81,4 @@
 </div>
 {% endblock content %}
 
+{% comment %} {% static 'clothes/css/pledge_list.css' %} {% endcomment %}
