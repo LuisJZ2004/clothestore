@@ -26,10 +26,11 @@ def clothes_list_view(request, gender, slug):
     pledges = Pledge.objects.filter(clothing_type__slug=slug, gender=gender)
     
     filters = {
-        "page": request.GET.get("page") if request.GET.get("page") != None else 1,
+        "page": request.GET.get("page") if request.GET.get("page") != None and request.GET.get("page") != 0 else 1,
+        
     }
 
-    pledges = make_pagination(pledges, filters["page"])
+    pledges = make_pagination(pledges, filters["page"], 5)
 
     return render(
         request=request,

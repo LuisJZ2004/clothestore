@@ -31,8 +31,12 @@ class MakePaginationTests(TestCase):
     
     def test_sizes_pagination(self):
         sizes_list = list(self.sizes.order_by("name"))[0:5]
-        self.assertEqual(list(make_pagination(self.sizes.order_by("name"),1)), sizes_list)
+        self.assertEqual(list(make_pagination(self.sizes.order_by("name"),1,5)), sizes_list)
 
         half_sizes = list(self.sizes.order_by("name")[5:10])
-        self.assertEqual(list(make_pagination(self.sizes.order_by("name"),2)), half_sizes)
+        self.assertEqual(list(make_pagination(self.sizes.order_by("name"),2,5)), half_sizes)
+
+        seven_sizes = list(self.sizes.order_by("name")[0:7])
+        self.assertEqual(list(make_pagination(self.sizes.order_by("name"),1,7)), seven_sizes)
+
         print(self.sizes.order_by("name"))
