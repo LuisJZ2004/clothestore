@@ -33,12 +33,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # My apps
     'home.apps.HomeConfig',
     'clothes.apps.ClothesConfig',
     'brands.apps.BrandsConfig',
     'search.apps.SearchConfig',
     'accounts.apps.AccountsConfig',
+    'extra_logic.apps.ExtraLogicConfig',
 
+    # Default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
