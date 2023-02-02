@@ -1,5 +1,5 @@
 # Django
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404
 from django.views.generic import DetailView, ListView
 
@@ -25,9 +25,20 @@ class ClothingTypeView(ListView):
 def clothes_list_view(request, gender, slug):
     pledges = Pledge.objects.filter(clothing_type__slug=slug, gender=gender)
     
+    try:
+        if request.GET.get("page") != None:
+            int(request.GET.get("page"))
+    except ValueError:
+        return redirect(to="clothes:pledge_list_path", gender=gender, slug=slug)
+    
+    page = int(request.GET.get("page"))
     filters = {
-        "page": request.GET.get("page") if request.GET.get("page") != None and request.GET.get("page") != 0 else 1,
-        
+        "page": page if page != None and page != 0 else 1,
+        "fields": {
+            "pledgecolorset__sizes__name": request.GET.get("size"),
+            "pledgecolorset__color__name": request.GET.get("color")
+        },
+        "order": request.GET.get("order"),
     }
 
     pledges = make_pagination(pledges, filters["page"], 5)
