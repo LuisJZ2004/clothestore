@@ -1,9 +1,13 @@
+# Django
 from django.shortcuts import get_object_or_404, render
 from django.http import Http404
 from django.views.generic import DetailView, ListView
+
+# This app
 from .models import ClothingType, Pledge
 
-# Create your views here.
+# My apps
+from extra_logic.clothes.functions import make_pagination
 
 class ClothingTypeView(ListView):
     model=ClothingType
@@ -21,6 +25,12 @@ class ClothingTypeView(ListView):
 def clothes_list_view(request, gender, slug):
     pledges = Pledge.objects.filter(clothing_type__slug=slug, gender=gender)
     
+    filters = {
+        "page": request.GET.get("page") if request.GET.get("page") != None else 1,
+    }
+
+    pledges = make_pagination(pledges, filters["page"])
+
     return render(
         request=request,
         template_name="clothes/clothes_list.html",
