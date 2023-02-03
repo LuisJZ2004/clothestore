@@ -44,10 +44,11 @@ def clothes_list_view(request, gender, slug):
     filtering = Filter()
     pledges = filtering.get_queryset_filtered(pledges, filters["fields"], filters["order"])
 
-    pledges = make_pagination(pledges, filters["page"], 5)
     quantities = QuantityOfAField()
-
     print(quantities.get_quantity_of_each_field(pledges))
+
+    pledges = make_pagination(pledges, filters["page"], 5)
+    
     return render(
         request=request,
         template_name="clothes/clothes_list.html",

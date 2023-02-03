@@ -1,5 +1,6 @@
 # Python
 import operator
+import collections
 from functools import reduce
 
 # Django
@@ -7,6 +8,7 @@ from django.db.models import QuerySet, Q
 from django.core.exceptions import FieldError
 
 # My apps
+from clothes.models import PledgeColorSet
 
 class Filter:
     """
@@ -80,16 +82,40 @@ class QuantityOfAField:
             }
         }
     """
-    def get_quantity_of_each_field(self, queryset: QuerySet):
-        final_fields = {}
-        final_fields["colors"] = {}
-        final_fields["sizes"] = {}
 
-        for pledge in queryset:
-            for color_set in pledge.pledgecolorset_set.all():
-                if color_set.color.name not in final_fields["colors"].keys():
-                    final_fields["colors"][color_set.color.name] = 1
-                else:
-                    final_fields["colors"][color_set.color.name] += 1
+    def __get_pledgecolorset_instances(self, pledges: QuerySet):
+        instances_list = []
+        
+        for pledge in pledges:
+            instances_list.append(
+                pledge.pledgecolorset_set.all()
+            )
+        return instances_list
 
-        return final_fields
+    # def __get_instances_counter(self, pledges: QuerySet):
+    #     return dict(collections.Counter(self.__get_pledgecolorset_instances(pledges)))
+
+    def __get_color_names(self, pledge_color_set: list):
+        names_list = []
+        
+        for instance in pledge_color_set:
+            names_list.append(
+                instance.color.name
+            )
+        return names_list
+
+    def __get_complete_list_with_repeated_color_names(self, pledges: QuerySet):
+        pledge_color_sets = self.__get_pledgecolorset_instances(pledges)
+        final_list = []
+
+        for set in pledge_color_sets:
+            final_list.extend(
+                self.__get_color_names(set)
+            )
+        return final_list
+
+    def __get_color_names_counter(self, pledges: QuerySet):
+        return dict(collections.Counter(self.__get_complete_list_with_repeated_color_names(pledges)))
+
+    def get_quantity_of_each_field(self, queryset: QuerySet):        
+        return self.__get_color_names_counter(queryset)
