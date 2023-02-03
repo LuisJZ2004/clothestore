@@ -8,6 +8,7 @@ from .models import ClothingType, Pledge
 
 # My apps
 from extra_logic.clothes.functions import make_pagination
+from extra_logic.clothes.classes import Filter
 
 class ClothingTypeView(ListView):
     model=ClothingType
@@ -24,14 +25,13 @@ class ClothingTypeView(ListView):
     
 def clothes_list_view(request, gender, slug):
     pledges = Pledge.objects.filter(clothing_type__slug=slug, gender=gender)
-    
+    page = None
     try:
         if request.GET.get("page") != None:
-            int(request.GET.get("page"))
+           page = int(request.GET.get("page"))
     except ValueError:
         return redirect(to="clothes:pledge_list_path", gender=gender, slug=slug)
     
-    page = int(request.GET.get("page"))
     filters = {
         "page": page if page != None and page != 0 else 1,
         "fields": {
@@ -40,6 +40,9 @@ def clothes_list_view(request, gender, slug):
         },
         "order": request.GET.get("order"),
     }
+    
+    filtering = Filter()
+    pledges = filtering.get_queryset_filtered(pledges, filters["fields"])
 
     pledges = make_pagination(pledges, filters["page"], 5)
 

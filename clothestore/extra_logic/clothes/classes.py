@@ -39,7 +39,7 @@ class Filter:
         raise ValueError("It cannot make a queryset with empty fields")
 
 
-    def get_queryset_filtered(self, queryset: QuerySet, fields: dict, order: str | None):
+    def get_queryset_filtered(self, queryset: QuerySet, fields: dict, order=None):
         """
         It is just needed to invoque this method to make the filter.
         The arg 'field' needs to have in its keys the complete name of the query, for example: if you want 
@@ -47,4 +47,7 @@ class Filter:
         after the key
         The arg 'order' needs a name of the field in a string to order the queryset, it is optional
         """
-        pass
+        if self.__are_fields_filled(fields=fields):
+            return queryset.filter(self.__get_Q_queries_in_AND(fields))
+        else:
+            return queryset
