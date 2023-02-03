@@ -4,6 +4,7 @@ from functools import reduce
 
 # Django
 from django.db.models import QuerySet, Q
+from django.core.exceptions import FieldError
 
 # My apps
 
@@ -48,6 +49,12 @@ class Filter:
         The arg 'order' needs a name of the field in a string to order the queryset, it is optional
         """
         if self.__are_fields_filled(fields=fields):
+            if order:
+                try:
+                    return queryset.filter(self.__get_Q_queries_in_AND(fields)).order_by(order)
+                except FieldError:
+                    pass
+
             return queryset.filter(self.__get_Q_queries_in_AND(fields))
         else:
             return queryset

@@ -42,7 +42,7 @@ def clothes_list_view(request, gender, slug):
     }
     
     filtering = Filter()
-    pledges = filtering.get_queryset_filtered(pledges, filters["fields"])
+    pledges = filtering.get_queryset_filtered(pledges, filters["fields"], filters["order"])
 
     pledges = make_pagination(pledges, filters["page"], 5)
 
