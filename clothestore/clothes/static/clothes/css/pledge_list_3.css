@@ -23,6 +23,7 @@
 
 .clothe {
     padding: 10px;
+    max-width: 260px;
     display: flex;
     justify-content: center;
     align-items: center;

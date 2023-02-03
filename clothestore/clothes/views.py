@@ -8,7 +8,7 @@ from .models import ClothingType, Pledge
 
 # My apps
 from extra_logic.clothes.functions import make_pagination
-from extra_logic.clothes.classes import Filter
+from extra_logic.clothes.classes import Filter, QuantityOfAField
 
 class ClothingTypeView(ListView):
     model=ClothingType
@@ -45,7 +45,9 @@ def clothes_list_view(request, gender, slug):
     pledges = filtering.get_queryset_filtered(pledges, filters["fields"], filters["order"])
 
     pledges = make_pagination(pledges, filters["page"], 5)
+    quantities = QuantityOfAField()
 
+    print(quantities.get_quantity_of_each_field(pledges))
     return render(
         request=request,
         template_name="clothes/clothes_list.html",
