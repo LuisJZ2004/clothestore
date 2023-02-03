@@ -6,6 +6,7 @@ from clothes.models import Size
 
 # This app
 from .clothes.functions import make_pagination
+from .clothes.classes import Filter
 
 class MakePaginationTests(TestCase):
 
@@ -25,8 +26,9 @@ class MakePaginationTests(TestCase):
 
         for size in SIZES:
             Size.objects.create(name=size)
-
+        
         self.sizes = Size.objects.all()
+        
         return super().setUp()
     
     def test_sizes_pagination(self):
@@ -40,3 +42,6 @@ class MakePaginationTests(TestCase):
         self.assertEqual(list(make_pagination(self.sizes.order_by("name"),1,7)), seven_sizes)
 
         print(self.sizes.order_by("name"))
+
+    def test_filter_Q_query(self):
+        pass
