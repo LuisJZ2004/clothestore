@@ -63,22 +63,41 @@
         </select>
     </div>
 </div> {% endcomment %}
+<div class="main-container">
+    <div class="list-clothes">
+        {% for pledge in pledges %}
 
-<div class="list-clothes">
-    {% for pledge in pledges %}
-
-    <div class="clothe">
-        <a href="#">
-            <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" alt="" width="240px">
-        </a>
-        <div class="name">
-            <a href="#">{{ pledge.name }}</a>
+        <div class="clothe">
+            <a href="#">
+                <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" alt="" width="240px">
+            </a>
+            <div class="name">
+                <a href="#">{{ pledge.name }}</a>
+            </div>
+            
         </div>
-        
+
+        {% endfor %}
     </div>
 
-    {% endfor %}
+    <div class="filters">
+        <form name="colors" action="{% url 'clothes:get_form_checkboxes_path' gender clothing_type_slug %}" method="GET">
+            <h2>colors</h2>
+            <div name="colors">
+                {% for key, value in colors.items %}
+                <label for="checkbox">
+                    <input type="checkbox" name="color{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}" checked>
+                    <span>{{key}} ({{value}}) </span>
+                </label>
+                {% endfor %}
+            </div>
+                
+        </form>
+        </script>
+    </div>
+
 </div>
+    
 {% endblock content %}
 
 {% comment %} {% static 'clothes/css/pledge_list.css' %} {% endcomment %}

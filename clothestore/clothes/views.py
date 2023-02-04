@@ -45,7 +45,7 @@ def clothes_list_view(request, gender, slug):
     pledges = filtering.get_queryset_filtered(pledges, filters["fields"], filters["order"])
 
     quantities = QuantityOfAField()
-    print(quantities.get_quantity_of_each_field(pledges))
+    # print(quantities.get_quantity_of_each_field(pledges))
 
     pledges = make_pagination(pledges, filters["page"], 5)
     
@@ -53,9 +53,17 @@ def clothes_list_view(request, gender, slug):
         request=request,
         template_name="clothes/clothes_list.html",
         context={
-            "pledges": pledges
+            "pledges": pledges,
+            "gender": gender,
+            "clothing_type_slug": slug,
+            "colors": quantities.get_quantity_of_each_field(pledges)
         }
     )
+
+def get_form_checkboxes(request, gender, slug):
+    print(request.GET)
+
+    return redirect(to="clothes:pledge_list_path", gender=gender, slug=slug)
 
 def clothes_by_gender(request, gender):
     """
