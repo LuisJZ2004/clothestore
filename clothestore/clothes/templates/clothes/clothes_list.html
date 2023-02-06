@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_3.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_5.css' %}" type="text/css">
 {% endblock styles %}
 
 {% block content %}
@@ -64,38 +64,38 @@
     </div>
 </div> {% endcomment %}
 <div class="main-container">
-    <div class="list-clothes">
-        {% for pledge in pledges %}
-
-        <div class="clothe">
-            <a href="#">
-                <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" alt="" width="240px">
-            </a>
-            <div class="name">
-                <a href="#">{{ pledge.name }}</a>
-            </div>
-            
-        </div>
-
-        {% endfor %}
-    </div>
-
+    
     <div class="filters">
-        <form name="colors" action="{% url 'clothes:get_form_checkboxes_path' gender clothing_type_slug %}" method="GET">
-            <h2>colors</h2>
-            <div name="colors">
+        <form class="filter-form" name="colors" action="{% url 'clothes:pledge_list_path' gender clothing_type_slug %}?page=1" method="GET">
+            <div class="filter-tittle">
+                <h2>colors</h2>
+            </div>
+            <div name="colors" class="colors">
                 {% for key, value in colors.items %}
-                <label for="checkbox">
-                    <input type="checkbox" name="color{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}" checked>
+                <label class="checkbox-label" for="checkbox">
+                    <input class="filter-checkboxes" type="checkbox" name="color{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}" checked>
                     <span>{{key}} ({{value}}) </span>
                 </label>
                 {% endfor %}
             </div>
                 
         </form>
-        </script>
     </div>
+    <div class="list-clothes">
+        {% for pledge in pledges %}
 
+            <div class="clothe">
+                <a href="#">
+                    <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" alt="" width="220px">
+                </a>
+                <div class="name">
+                    <a href="#">{{ pledge.name }}</a>
+                </div>
+                
+            </div>
+
+        {% endfor %}
+    </div>
 </div>
     
 {% endblock content %}

@@ -27,18 +27,18 @@ def clothes_list_view(request, gender, slug):
     pledges = Pledge.objects.filter(clothing_type__slug=slug, gender=gender)
     page = None
     try:
-        if request.GET.get("page") != None:
-           page = int(request.GET.get("page"))
+        if request.POST.get("page") != None:
+           page = int(request.POST.get("page"))
     except ValueError:
         return redirect(to="clothes:pledge_list_path", gender=gender, slug=slug)
     
     filters = {
         "page": page if page != None and page != 0 else 1,
         "fields": {
-            "pledgecolorset__sizes__name": request.GET.get("size"),
-            "pledgecolorset__color__name": request.GET.get("color")
+            "pledgecolorset__sizes__name": request.POST.get("size"),
+            "pledgecolorset__color__name": request.POST.get("color")
         },
-        "order": request.GET.get("order"),
+        "order": request.POST.get("order"),
     }
     
     filtering = Filter()
@@ -63,7 +63,7 @@ def clothes_list_view(request, gender, slug):
 def get_form_checkboxes(request, gender, slug):
     print(request.GET)
 
-    return redirect(to="clothes:pledge_list_path", gender=gender, slug=slug)
+    return redirect(to=request.path, gender=gender, slug=slug)
 
 def clothes_by_gender(request, gender):
     """
