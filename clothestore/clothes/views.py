@@ -40,7 +40,7 @@ def clothes_list_view(request, gender, slug):
         },
         "order": request.POST.get("order"),
     }
-    
+    print(request.POST)
     filtering = Filter()
     pledges = filtering.get_queryset_filtered(pledges, filters["fields"], filters["order"])
 
@@ -56,7 +56,8 @@ def clothes_list_view(request, gender, slug):
             "pledges": pledges,
             "gender": gender,
             "clothing_type_slug": slug,
-            "colors": quantities.get_quantity_of_each_field(pledges)
+            "colors": quantities.get_quantity_of_each_field(pledges)["colors"],
+            "sizes": quantities.get_quantity_of_each_field(pledges)["sizes"]
         }
     )
 

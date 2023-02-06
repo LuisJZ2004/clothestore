@@ -45,6 +45,13 @@
     display: flex;
     flex-direction: column;
 }
+.main-container .filters .sizes{
+    border: 2px solid black;
+    width: 150px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
 .main-container {
     border: 2px solid black;
     display: flex;

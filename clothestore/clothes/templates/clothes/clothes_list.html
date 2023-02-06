@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_5.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_6.css' %}" type="text/css">
 {% endblock styles %}
 
 {% block content %}
@@ -67,6 +67,10 @@
     
     <div class="filters">
         <form class="filter-form" name="colors" action="{% url 'clothes:pledge_list_path' gender clothing_type_slug %}?page=1" method="GET">
+            {% if page %}
+                <input id="prodId" name="prodId" type="hidden" value={{ page }}>
+            {% endif %}
+            
             <div class="filter-tittle">
                 <h2>colors</h2>
             </div>
@@ -78,7 +82,17 @@
                 </label>
                 {% endfor %}
             </div>
-                
+            <div class="filter-tittle">
+                <h2>sizes</h2>
+            </div>
+            <div name="sizes" class="sizes">
+                {% for key, value in sizes.items %}
+                <label class="checkbox-label" for="checkbox">
+                    <input class="filter-checkboxes" type="checkbox" name="size{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}" checked>
+                    <span>{{key}} ({{value}}) </span>
+                </label>
+                {% endfor %}
+            </div>
         </form>
     </div>
     <div class="list-clothes">
