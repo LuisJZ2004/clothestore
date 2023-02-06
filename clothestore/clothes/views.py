@@ -26,29 +26,38 @@ class ClothingTypeView(ListView):
 def clothes_list_view(request, gender, slug):
     pledges = Pledge.objects.filter(clothing_type__slug=slug, gender=gender)
     page = None
-    try:
-        if request.POST.get("page") != None:
-           page = int(request.POST.get("page"))
-    except ValueError:
-        return redirect(to="clothes:pledge_list_path", gender=gender, slug=slug)
-    
-    filters = {
-        "page": page if page != None and page != 0 else 1,
-        "fields": {
-            "pledgecolorset__sizes__name": request.POST.get("size"),
-            "pledgecolorset__color__name": request.POST.get("color")
-        },
-        "order": request.POST.get("order"),
-    }
-    print(request.POST)
-    filtering = Filter()
-    pledges = filtering.get_queryset_filtered(pledges, filters["fields"], filters["order"])
 
-    quantities = QuantityOfAField()
-    # print(quantities.get_quantity_of_each_field(pledges))
+    selected_colors = None
+    selected_sizes = None
 
-    pledges = make_pagination(pledges, filters["page"], 5)
-    
+    if request.method == "POST":
+        selected_colors = [request.POST[color] for color in request.POST.keys() if "color" in color]
+        selected_sizes = [request.POST[size] for size in request.POST.keys() if "size" in size]
+        print(selected_colors)
+        try:
+            if request.POST.get("page") != None:
+                page = int(request.POST.get("page"))
+        except ValueError:
+            return redirect(to="clothes:pledge_list_path", gender=gender, slug=slug)
+        print(selected_colors)
+        filters = {
+            "page": page if page != None and page != 0 else 1,
+            "fields": {
+                "pledgecolorset__sizes__name__in": selected_sizes,
+                "pledgecolorset__color__name__in": selected_colors,
+            },
+            "order": request.POST.get("order"),
+        }
+        filtering = Filter()
+        pledges = filtering.get_queryset_filtered(pledges.distinct(), filters["fields"], filters["order"])
+
+    quantities = QuantityOfAField().get_quantity_of_each_field(pledges)
+
+    if page:
+        pledges = make_pagination(pledges, page, 5)
+    else:
+        pledges = make_pagination(pledges, 1, 5)
+
     return render(
         request=request,
         template_name="clothes/clothes_list.html",
@@ -56,8 +65,11 @@ def clothes_list_view(request, gender, slug):
             "pledges": pledges,
             "gender": gender,
             "clothing_type_slug": slug,
-            "colors": quantities.get_quantity_of_each_field(pledges)["colors"],
-            "sizes": quantities.get_quantity_of_each_field(pledges)["sizes"]
+            "colors": quantities["colors"],
+            "sizes": quantities["sizes"],
+            
+            "selected_colors": selected_colors if selected_colors else [],
+            "selected_sizes": selected_sizes if selected_sizes else []
         }
     )
 

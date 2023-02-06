@@ -29,14 +29,15 @@ class Filter:
         returns a Q object with the complete Q query necesary to filter the queryset, with AND operator
         """
         if self.__are_fields_filled(fields):
-            Qs = []
+            tuples_in_Qs = []
 
             for field in fields.keys():
                 if fields[field]:
-                    Qs.append(
-                        Q((field, fields[field]))
+                    tuples_in_Qs.append(
+                        (field, fields[field],)
                     )
-            
+            Qs = [Q(query) for query in tuples_in_Qs]
+
             return reduce(operator.and_, Qs)
 
         raise ValueError("It cannot make a queryset with empty fields")
@@ -56,7 +57,7 @@ class Filter:
                     return queryset.filter(self.__get_Q_queries_in_AND(fields)).order_by(order)
                 except FieldError:
                     pass
-
+            print(self.__get_Q_queries_in_AND(fields))
             return queryset.filter(self.__get_Q_queries_in_AND(fields))
         else:
             return queryset

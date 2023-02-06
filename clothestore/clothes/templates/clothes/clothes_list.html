@@ -66,7 +66,8 @@
 <div class="main-container">
     
     <div class="filters">
-        <form class="filter-form" name="colors" action="{% url 'clothes:pledge_list_path' gender clothing_type_slug %}?page=1" method="GET">
+        <form class="filter-form" name="colors" action="{% url 'clothes:pledge_list_path' gender clothing_type_slug %}" method="POST">
+            {% csrf_token %}
             {% if page %}
                 <input id="prodId" name="prodId" type="hidden" value={{ page }}>
             {% endif %}
@@ -77,7 +78,11 @@
             <div name="colors" class="colors">
                 {% for key, value in colors.items %}
                 <label class="checkbox-label" for="checkbox">
-                    <input class="filter-checkboxes" type="checkbox" name="color{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}" checked>
+                    {% if key in selected_colors %}
+                        <input class="filter-checkboxes" type="checkbox" name="color{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}" checked>                    
+                    {% else %}
+                        <input class="filter-checkboxes" type="checkbox" name="color{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}">
+                    {% endif %}
                     <span>{{key}} ({{value}}) </span>
                 </label>
                 {% endfor %}
@@ -88,7 +93,11 @@
             <div name="sizes" class="sizes">
                 {% for key, value in sizes.items %}
                 <label class="checkbox-label" for="checkbox">
-                    <input class="filter-checkboxes" type="checkbox" name="size{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}" checked>
+                    {% if key in selected_sizes %}
+                        <input class="filter-checkboxes" type="checkbox" name="size{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}" checked>                    
+                    {% else %}
+                        <input class="filter-checkboxes" type="checkbox" name="size{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}">
+                    {% endif %}
                     <span>{{key}} ({{value}}) </span>
                 </label>
                 {% endfor %}
