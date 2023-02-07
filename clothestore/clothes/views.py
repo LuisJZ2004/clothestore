@@ -27,24 +27,29 @@ def clothes_list_view(request, gender, slug):
     pledges = Pledge.objects.filter(clothing_type__slug=slug, gender=gender)
     page = None
 
-    selected_colors = None
-    selected_sizes = None
+    selected_color = None
+    selected_size = None
 
     if request.method == "POST":
-        selected_colors = [request.POST[color] for color in request.POST.keys() if "color" in color]
-        selected_sizes = [request.POST[size] for size in request.POST.keys() if "size" in size]
-        print(selected_colors)
+        selected_color = request.POST.get("color")
+        selected_size = request.POST.get("size")
+
+        print(selected_color)
         try:
             if request.POST.get("page") != None:
                 page = int(request.POST.get("page"))
         except ValueError:
             return redirect(to="clothes:pledge_list_path", gender=gender, slug=slug)
-        print(selected_colors)
+
+        
+        print(selected_color)
+
+
         filters = {
             "page": page if page != None and page != 0 else 1,
             "fields": {
-                "pledgecolorset__sizes__name__in": selected_sizes,
-                "pledgecolorset__color__name__in": selected_colors,
+                "pledgecolorset__sizes__name": selected_size,
+                "pledgecolorset__color__name": selected_color,
             },
             "order": request.POST.get("order"),
         }
@@ -68,8 +73,8 @@ def clothes_list_view(request, gender, slug):
             "colors": quantities["colors"],
             "sizes": quantities["sizes"],
             
-            "selected_colors": selected_colors if selected_colors else [],
-            "selected_sizes": selected_sizes if selected_sizes else []
+            "selected_color": selected_color,
+            "selected_size": selected_size
         }
     )
 

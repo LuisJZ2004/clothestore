@@ -76,31 +76,47 @@
                 <h2>colors</h2>
             </div>
             <div name="colors" class="colors">
-                {% for key, value in colors.items %}
-                <label class="checkbox-label" for="checkbox">
-                    {% if key in selected_colors %}
-                        <input class="filter-checkboxes" type="checkbox" name="color{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}" checked>                    
-                    {% else %}
-                        <input class="filter-checkboxes" type="checkbox" name="color{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}">
-                    {% endif %}
-                    <span>{{key}} ({{value}}) </span>
-                </label>
-                {% endfor %}
+                {% if selected_color %}
+                    <label class="checkbox-label" for="checkbox">
+                        <input class="filter-checkboxes" type="checkbox" name="color" onclick="javascript: submit()" value="{{selected_color}}" checked>
+                        <span>{{selected_color}} ({{value}}) </span>
+                    </label>    
+                {% else %}
+                    {% for key, value in colors.items %}
+                    <label class="checkbox-label" for="checkbox">
+                        {% if key in selected_colors %}
+                            <input class="filter-checkboxes" type="checkbox" name="color" onclick="javascript: submit()" value="{{key}}" checked>                    
+                        {% else %}
+                            <input class="filter-checkboxes" type="checkbox" name="color" onclick="javascript: submit()" value="{{key}}">
+                        {% endif %}
+                        <span>{{key}} ({{value}}) </span>
+                    </label>
+                    {% endfor %}
+                {% endif %}
+                    
             </div>
             <div class="filter-tittle">
                 <h2>sizes</h2>
             </div>
             <div name="sizes" class="sizes">
-                {% for key, value in sizes.items %}
-                <label class="checkbox-label" for="checkbox">
-                    {% if key in selected_sizes %}
-                        <input class="filter-checkboxes" type="checkbox" name="size{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}" checked>                    
-                    {% else %}
-                        <input class="filter-checkboxes" type="checkbox" name="size{{forloop.counter}}" onclick="javascript: submit()" value="{{key}}">
-                    {% endif %}
-                    <span>{{key}} ({{value}}) </span>
-                </label>
-                {% endfor %}
+                {% if selected_size %}
+                    <label class="checkbox-label" for="checkbox">
+                        <input class="filter-checkboxes" type="checkbox" name="size" onclick="javascript: submit()" value="{{selected_size}}" checked>
+                        <span>{{selected_size}} ({{value}}) </span>
+                    </label>
+                {% else %}
+                    {% for key, value in sizes.items %}
+                            <label class="checkbox-label" for="checkbox">
+                                {% if key in selected_sizes %}
+                                    <input class="filter-checkboxes" type="checkbox" name="size" onclick="javascript: submit()" value="{{key}}" checked>                    
+                                {% else %}
+                                    <input class="filter-checkboxes" type="checkbox" name="size" onclick="javascript: submit()" value="{{key}}">
+                                {% endif %}
+                                <span>{{key}} ({{value}}) </span>
+                            </label>
+                        {% endfor %}
+                {% endif %}
+                    
             </div>
         </form>
     </div>

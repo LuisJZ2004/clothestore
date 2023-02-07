@@ -29,14 +29,14 @@ class Filter:
         returns a Q object with the complete Q query necesary to filter the queryset, with AND operator
         """
         if self.__are_fields_filled(fields):
-            tuples_in_Qs = []
+            # tuples_in_Qs = []
 
-            for field in fields.keys():
-                if fields[field]:
-                    tuples_in_Qs.append(
-                        (field, fields[field],)
-                    )
-            Qs = [Q(query) for query in tuples_in_Qs]
+            # for field in fields.keys():
+            #     if fields[field]:
+            #         tuples_in_Qs.append(
+            #             (field, fields[field],)
+            #         )
+            Qs = [Q( (field, fields[field]) ) for field in fields.keys() if fields[field]]
 
             return reduce(operator.and_, Qs)
 
@@ -108,7 +108,7 @@ class QuantityOfAField:
 
     def __get_color_names_counter(self, pledges: QuerySet):
         return dict(collections.Counter(self.__get_complete_list_with_repeated_color_names(pledges)))
-
+    ############################### 
     # Getting sizes
     def __get_size_names(self, sizes: QuerySet):
         return [instance.name for instance in sizes]
@@ -141,7 +141,7 @@ class QuantityOfAField:
     def __get_size_names_counter(self, pledges: QuerySet):
         return dict(collections.Counter(self.__get_complete_list_with_repeated_size_names(pledges)))
     
-    def get_quantity_of_each_field(self, queryset: QuerySet) -> dict:        
+    def get_quantity_of_each_field(self, queryset: QuerySet) -> dict: 
         return {
             "colors": self.__get_color_names_counter(queryset),
             "sizes": self.__get_size_names_counter(queryset),
