@@ -55,6 +55,7 @@ def clothes_list_view(request, gender, slug):
         }
         filtering = Filter()
         pledges = filtering.get_queryset_filtered(pledges.distinct(), filters["fields"], filters["order"])
+        query_len = len(pledges)
 
     quantities = QuantityOfAField().get_quantity_of_each_field(pledges, selected_color, selected_size)
 
@@ -74,7 +75,9 @@ def clothes_list_view(request, gender, slug):
             "sizes": quantities["sizes"],
             
             "selected_color": selected_color,
-            "selected_size": selected_size
+            "selected_size": selected_size,
+
+            "query_len": query_len,
         }
     )
 
