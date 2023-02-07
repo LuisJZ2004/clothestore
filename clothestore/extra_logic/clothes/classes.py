@@ -84,20 +84,37 @@ class QuantityOfAField:
         }
     """
     # Getting colors
-    def __get_pledgecolorset_instances(self, pledges: QuerySet):
+    def __get_pledgecolorset_instances(self, pledges: QuerySet, selected_color: str | None, selected_size: str | None):
         instances_list = []
         
-        for pledge in pledges:
-            instances_list.append(
-                pledge.pledgecolorset_set.all()
-            )
+        if selected_size and selected_color:
+            for pledge in pledges:
+                instances_list.append(
+                    pledge.pledgecolorset_set.filter(sizes__name=selected_size, color__name=selected_color)
+                )
+            
+        elif selected_size:
+            for pledge in pledges:
+                instances_list.append(
+                    pledge.pledgecolorset_set.filter(sizes__name=selected_size)
+                )
+        elif selected_color:
+            for pledge in pledges:
+                instances_list.append(
+                    pledge.pledgecolorset_set.filter(color__name=selected_color)
+                )
+        else:
+            for pledge in pledges:
+                instances_list.append(
+                    pledge.pledgecolorset_set.all()
+                )
         return instances_list
 
     def __get_color_names(self, pledge_color_set: list):
         return [instance.color.name for instance in pledge_color_set]
 
-    def __get_complete_list_with_repeated_color_names(self, pledges: QuerySet):
-        pledge_color_sets = self.__get_pledgecolorset_instances(pledges)
+    def __get_complete_list_with_repeated_color_names(self, pledges: QuerySet, selected_color, selected_size):
+        pledge_color_sets = self.__get_pledgecolorset_instances(pledges, selected_color, selected_size)
         final_list = []
 
         for set in pledge_color_sets:
@@ -106,8 +123,8 @@ class QuantityOfAField:
             )
         return final_list
 
-    def __get_color_names_counter(self, pledges: QuerySet):
-        return dict(collections.Counter(self.__get_complete_list_with_repeated_color_names(pledges)))
+    def __get_color_names_counter(self, pledges: QuerySet, selected_color, selected_size):
+        return dict(collections.Counter(self.__get_complete_list_with_repeated_color_names(pledges, selected_color, selected_size)))
     ############################### 
     # Getting sizes
     def __get_size_names(self, sizes: QuerySet):
@@ -121,15 +138,15 @@ class QuantityOfAField:
             )
         return final_list
 
-    def __get_pledgecolorset_sizes(self, pledges: QuerySet):
-        pledgecolorsets = self.__get_pledgecolorset_instances(pledges)
+    def __get_pledgecolorset_sizes(self, pledges: QuerySet, selected_color, selected_size):
+        pledgecolorsets = self.__get_pledgecolorset_instances(pledges, selected_color, selected_size)
         colorsets = self.__get_pledgecolorset_instances_separated(pledgecolorsets)
 
         return [colorset.sizes.all() for colorset in colorsets]
 
 
-    def __get_complete_list_with_repeated_size_names(self, pledges: QuerySet):
-        sizes = self.__get_pledgecolorset_sizes(pledges)
+    def __get_complete_list_with_repeated_size_names(self, pledges: QuerySet, selected_color, selected_size):
+        sizes = self.__get_pledgecolorset_sizes(pledges, selected_color, selected_size)
         final_list = []
 
         for size in sizes:
@@ -138,11 +155,13 @@ class QuantityOfAField:
             )
         return final_list
 
-    def __get_size_names_counter(self, pledges: QuerySet):
-        return dict(collections.Counter(self.__get_complete_list_with_repeated_size_names(pledges)))
+    def __get_size_names_counter(self, pledges: QuerySet, selected_color, selected_size):
+        return dict(collections.Counter(self.__get_complete_list_with_repeated_size_names(pledges, selected_color, selected_size)))
     
-    def get_quantity_of_each_field(self, queryset: QuerySet) -> dict: 
+    def get_quantity_of_each_field(self, queryset: QuerySet, selected_color: str | None, selected_size: str | None) -> dict: 
+        
+        
         return {
-            "colors": self.__get_color_names_counter(queryset),
-            "sizes": self.__get_size_names_counter(queryset),
+            "colors": self.__get_color_names_counter(queryset, selected_color, selected_size),
+            "sizes": self.__get_size_names_counter(queryset, selected_color, selected_size),
         }
