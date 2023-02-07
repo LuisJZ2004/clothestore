@@ -82,11 +82,20 @@ class QuantityOfAField:
                 "XXL": 1
             }
         }
+        This class is not scalable, it only works to filter pledges in this project. It can be taken as
+        reference but not copy paste
     """
-    # Getting colors
     def __get_pledgecolorset_instances(self, pledges: QuerySet, selected_color: str | None, selected_size: str | None):
+        """
+        Gets all the PledgeColorSet from a sended queryset with pledges. This is the main class we will need to
+        get the final result.
+        It returns a list with all the PledgeColorSet querysets 
+        """
+        
         instances_list = []
         
+        # We'll consider a selected_size and selected_color picked by the user and It makes queries in base to
+        # that
         if selected_size and selected_color:
             for pledge in pledges:
                 instances_list.append(
@@ -110,10 +119,22 @@ class QuantityOfAField:
                 )
         return instances_list
 
+    # Getting colors
+
     def __get_color_names(self, pledge_color_set: list):
+        """
+        Receives a list of PledgeColorSet querysets and returns a list with all the names of the colors in the
+        PledgeColorSets. It is an independant method, doesn't need any other method to work
+        """
         return [instance.color.name for instance in pledge_color_set]
 
     def __get_complete_list_with_repeated_color_names(self, pledges: QuerySet, selected_color, selected_size):
+        """
+        Receives a pledges queryset, selected_color and selected_size. First it gets the pledgecolorsets with the 
+        method "__get_pledgecolorset_instances()" than, with the method "__get_color_names()" it'll send each 
+        pledgecolorset to get all their names in a list, and last it will extend the names into a final_list to return
+        it, no matter the repeated name
+        """
         pledge_color_sets = self.__get_pledgecolorset_instances(pledges, selected_color, selected_size)
         final_list = []
 
@@ -124,13 +145,26 @@ class QuantityOfAField:
         return final_list
 
     def __get_color_names_counter(self, pledges: QuerySet, selected_color, selected_size):
+        """
+        Returns a counter with all the names of the colors in the pledgecolorset gotten, with the times their
+        are in total through all the sets
+        """
         return dict(collections.Counter(self.__get_complete_list_with_repeated_color_names(pledges, selected_color, selected_size)))
     ############################### 
     # Getting sizes
     def __get_size_names(self, sizes: QuerySet):
+        """
+        Receives a list of sizes querysets and returns a list with all the names of the sizes in the
+        queryset. It is an independant method, doesn't need any other method to work
+        """
         return [instance.name for instance in sizes]
 
     def __get_pledgecolorset_instances_separated(self, pledgecolorsets_list: list):
+        """
+        Receives a list of pledgecolorset querysets, it goes through all the list getting each queryset, turns 
+        them in list and extends it in a final list in order to have them separated and return. It is an independant method, 
+        doesn't need any other method to work
+        """
         final_list = []
         for instance in pledgecolorsets_list:
             final_list.extend(
@@ -139,6 +173,11 @@ class QuantityOfAField:
         return final_list
 
     def __get_pledgecolorset_sizes(self, pledges: QuerySet, selected_color, selected_size):
+        """
+        Receives a pledge queryset, selected_color and selected_size. First it gets pledgecolorset instances, 
+        with its received args, than it separates the queryset with the method "__get_pledgecolorset_instances_separated()"
+        last, returns a list with the querysets of the sizes in each pledgecolorser
+        """
         pledgecolorsets = self.__get_pledgecolorset_instances(pledges, selected_color, selected_size)
         colorsets = self.__get_pledgecolorset_instances_separated(pledgecolorsets)
 
@@ -146,6 +185,10 @@ class QuantityOfAField:
 
 
     def __get_complete_list_with_repeated_size_names(self, pledges: QuerySet, selected_color, selected_size):
+        """
+        It returns an extended list with all the repeated sizes names. First gets a list with the sizes querysets,
+        than it turns each one in a list to extend them in the end 
+        """
         sizes = self.__get_pledgecolorset_sizes(pledges, selected_color, selected_size)
         final_list = []
 

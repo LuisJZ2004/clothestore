@@ -25,6 +25,9 @@ class ClothingTypeView(ListView):
     
 def clothes_list_view(request, gender, slug):
     pledges = Pledge.objects.filter(clothing_type__slug=slug, gender=gender)
+
+    
+
     page = None
 
     selected_color = None
