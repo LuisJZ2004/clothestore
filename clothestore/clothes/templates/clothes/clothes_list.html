@@ -79,7 +79,7 @@
                 {% if selected_color %}
                     <label class="checkbox-label" for="checkbox">
                         <input class="filter-checkboxes" type="checkbox" name="color" onclick="javascript: submit()" value="{{selected_color}}" checked>
-                        <span>{{selected_color}} ({{value}}) </span>
+                        <span>{{selected_color}} ({{query_len}}) </span>
                     </label>    
                 {% else %}
                     {% for key, value in colors.items %}
@@ -102,7 +102,7 @@
                 {% if selected_size %}
                     <label class="checkbox-label" for="checkbox">
                         <input class="filter-checkboxes" type="checkbox" name="size" onclick="javascript: submit()" value="{{selected_size}}" checked>
-                        <span>{{selected_size}} ({{value}}) </span>
+                        <span>{{selected_size}} ({{query_len}}) </span>
                     </label>
                 {% else %}
                     {% for key, value in sizes.items %}
