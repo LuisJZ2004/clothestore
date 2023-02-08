@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_7.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_8.css' %}" type="text/css">
 {% endblock styles %}
 
 {% block content %}
@@ -66,10 +66,10 @@
 <div class="main-container">
     
     <div class="filters">
-        <form class="filter-form" name="colors" action="{% url 'clothes:pledge_list_path' gender clothing_type_slug %}" method="POST">
+        <form class="filter-form" action="{% url 'clothes:pledge_list_path' gender clothing_type_slug %}" method="POST">
             {% csrf_token %}
             {% if page %}
-                <input id="prodId" name="prodId" type="hidden" value={{ page }}>
+                <input id="prodId" name="page" type="hidden" value={{ page }}>
             {% endif %}
             
             <div class="filter-tittle">
@@ -149,8 +149,28 @@
 
         {% endfor %}
     </div>
-</div>
+
     
+</div>
+<div class="pages">
+    <form class="filter-form" action="{% url 'clothes:pledge_list_path' gender clothing_type_slug %}" method="POST">
+        {% csrf_token %}
+        {% if selected_color %}
+        <input id="prodId" name="color" type="hidden" value={{ selected_color }}>
+        {% endif %}
+        {% if selected_size %}
+        <input id="prodId" name="size" type="hidden" value={{ selected_size }}>
+        {% endif %}
+        {% if selected_order %}
+        <input id="prodId" name="order" type="hidden" value={{ selected_order }}>
+        {% endif %}
+
+        {% for page in page_numbers %}
+            <button name="page" type="submit" value={{page}} class="submit-button">{{page}}</button>
+        {% endfor %}
+    </form>
+</div>
+
 {% endblock content %}
 
 {% comment %} {% static 'clothes/css/pledge_list.css' %} {% endcomment %}

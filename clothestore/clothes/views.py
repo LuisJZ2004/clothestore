@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView
 from .models import ClothingType, Pledge
 
 # My apps
-from extra_logic.clothes.functions import make_pagination
+from extra_logic.clothes.functions import make_pagination, get_pagination_numbers
 from extra_logic.clothes.classes import Filter, QuantityOfAField
 
 class ClothingTypeView(ListView):
@@ -33,7 +33,7 @@ def clothes_list_view(request, gender, slug):
         "price (higher to lower)": "-pledgecolorset__price",
         "price (lower to higher)": "pledgecolorset__price"
     }
-
+    page_numbers = range(1, get_pagination_numbers(pledges, 5)+1)
     page = None
 
     selected_color = None
@@ -53,7 +53,6 @@ def clothes_list_view(request, gender, slug):
             return redirect(to="clothes:pledge_list_path", gender=gender, slug=slug)
 
         filters = {
-            "page": page if page != None and page != 0 else 1,
             "fields": {
                 "pledgecolorset__sizes__name": selected_size,
                 "pledgecolorset__color__name": selected_color,
@@ -65,8 +64,8 @@ def clothes_list_view(request, gender, slug):
         query_len = len(pledges)
 
     quantities = QuantityOfAField().get_quantity_of_each_field(pledges, selected_color, selected_size)
-
-    if page:
+    
+    if page and page != 0:
         pledges = make_pagination(pledges, page, 5)
     else:
         pledges = make_pagination(pledges, 1, 5)
@@ -88,6 +87,9 @@ def clothes_list_view(request, gender, slug):
             "orders": orders,
 
             "query_len": query_len,
+
+            "page": page,
+            "page_numbers": page_numbers,
         }
     )
 

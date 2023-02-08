@@ -102,3 +102,20 @@
 .clothe .name a:hover {
     color:white;
 }
+
+/* pagination */
+.pages {
+    border: 2px solid black;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pages .submit-button {
+    width:25px;
+    height: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
