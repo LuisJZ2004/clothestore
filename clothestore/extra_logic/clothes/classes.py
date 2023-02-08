@@ -59,6 +59,8 @@ class Filter:
                     pass
             print(self.__get_Q_queries_in_AND(fields))
             return queryset.filter(self.__get_Q_queries_in_AND(fields))
+        elif order:
+            return queryset.order_by(order)
         else:
             return queryset
 

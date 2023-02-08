@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_6.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_7.css' %}" type="text/css">
 {% endblock styles %}
 
 {% block content %}
@@ -72,6 +72,20 @@
                 <input id="prodId" name="prodId" type="hidden" value={{ page }}>
             {% endif %}
             
+            <div class="filter-tittle">
+                <h2>orders</h2>
+            </div>
+            <select name="order", class="order-select" onChange="this.form.submit()">
+                <option value=""></option>
+                {% for order_name, order_value in orders.items %}
+                    {% if selected_order == order_value %}
+                        <option value="{{order_value}}" selected>{{order_name}}</option>
+                    {% else %}
+                        <option value="{{order_value}}">{{order_name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
             <div class="filter-tittle">
                 <h2>colors</h2>
             </div>
