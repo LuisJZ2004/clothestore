@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'brands.apps.BrandsConfig',
     'search.apps.SearchConfig',
     'accounts.apps.AccountsConfig',
+    'cart.apps.CartConfig',
     'extra_logic.apps.ExtraLogicConfig',
 
     # Default apps
