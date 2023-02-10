@@ -1,0 +1,90 @@
+.pledge {
+    display: flex;
+    flex-direction: column;
+}
+
+.pledge .tittle {
+    padding: 10px;
+    font-size: 3.0rem;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(240, 240, 240);
+}
+
+.pledge .pledge-info {
+    display: flex;
+    border: 2px solid black;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-width: 700px;
+}
+
+.pledge figure {
+    border: 1px solid black;
+    width: 550px;
+    min-height: 670px;
+}
+
+.pledge ul {
+    list-style: none;
+}
+
+.pledge ul li {
+    font-size: 2.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.pledge ul li a {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #acc7e9;
+    text-decoration: none;
+}
+
+.pledge ul li a:hover {
+    color: white;
+}
+
+.pledge .pledge-description {
+    border: 1px solid black;
+    max-width: 500px;
+}
+
+.pledge .pledge-description p {
+    font-size: 1.9rem;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.color-img{
+    border: 2px solid black;
+}
+.pledge-color-sets {
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+select {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 50px;
+}
+
+.extra_info {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+form {
+    width: 100%;
+    height: 100%;
+}

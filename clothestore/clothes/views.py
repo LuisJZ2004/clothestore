@@ -152,3 +152,9 @@ class ShowPledge(DetailView):
     context_object_name = "pledge"
     def get_object(self):
         return get_object_or_404(self.model, pk=self.kwargs.get('pk'))
+
+    def get_context_data(self, **kwargs):
+        return {
+            self.context_object_name: self.get_object(),
+            "pledgecolorsets": self.get_object().pledgecolorset_set.all(),
+        }

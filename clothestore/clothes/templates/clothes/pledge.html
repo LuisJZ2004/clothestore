@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'clothes/css/show_pledge.css' %}">
+<link rel="stylesheet" href="{% static 'clothes/css/show_pledge_1.css' %}">
 {% endblock styles %}
 
 {% block content %}
@@ -9,31 +9,65 @@
     <div class='tittle'>
         <h3>{{ pledge.name }}</h3>
     </div>
-
+<form action="">
     <div class="pledge-info">
-        <figure>
-            <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" width='500px'>
-        </figure>
-        <ul>
-            <li>brand: <a href="#">{{ pledge.brand.name }}</a> </li>
-            <li>type: <a href="">{{ pledge.clothing_type.name }}</a></li>
-            <li>gender: <a href="">{{ pledge.gender }}</a></li>
-            <li>added date: {{ pledge.pub_date }}</li>
-            <li>price: {{ pledge.price }}$</li>
-            <li>
-                <div class="pledge-description">
-                    <p>{{ pledge.description }}</p>
-                </div>
-            </li>
-            <li>
-                <form action="">
-                    {% csrf_token %}
-                    <button type="submit">Add to cart</button>
-                </form>
-            </li>
-        </ul>
         
+        {% if pledgecolorset_selected %}
+            <img src="{{ pledgecolorset_selected.image.url }}" alt="">
+        {% else %}
+            <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" width='370px'>
+        {% endif %}
+        
+        {% if pledgecolorset_selected %}
+            <select name="size" class="sizes">
+                {% for size in pledgecolorset_selected.sizes.all %}
+                    <option value="{{size.name}}">{{size.name}}</option>
+                {% endfor %}
+            </select>
+        {% else %}
+            <select class="sizes">
+                {% for size in pledge.pledgecolorset_set.all.first.sizes.all %}
+                    <option value="{{size.name}}">{{size.name}}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+
+        <div class="pledge-color-sets">
+            {% for set in pledgecolorsets %}
+                    <a href="#">
+                        <img class="color-img" src="{{ set.color.image.url }}" alt="" width="80px" heigh="80px">
+                    </a>
+                
+            {% endfor %}
+        </div>
+        
+        <div class='tittle'>
+            <h3>Product details</h3>
+        </div>
+
+        <div class="extra_info">
+            
+            <ul>
+                {% if pledgecolorset_selected %}
+                    <li>price: {{ pledgecolorset_selected.price }}$</li>
+                {% else %}
+                    <li>price: {{ pledge.pledgecolorset_set.all.first.price }}$</li>
+                {% endif %}
+                <li>brand: <a href="#">{{ pledge.brand.name }}</a> </li>
+                <li>type: <a href="">{{ pledge.clothing_type.name }}</a></li>
+                <li>gender: <a href="">{{ pledge.gender }}</a></li>
+                <li>added date: {{ pledge.pub_date }}</li>
+                
+            </ul>
+            <div class="pledge-description">
+                <p>{{ pledge.description }}</p>
+            </div>            
+        </div>
+
+        <button type="submit">Add to cart</button>
+    
     </div>
+</form>
     {% comment %} <div class="pledge-description">
         <p>{{ pledge.description }}</p>
     </div> {% endcomment %}
