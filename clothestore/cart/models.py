@@ -15,7 +15,7 @@ class Cart(models.Model):
     def total_price(self) -> int:
         total_price = 0
 
-        for set in self.products:
+        for set in self.products.all():
             total_price += set.price
         
         return total_price

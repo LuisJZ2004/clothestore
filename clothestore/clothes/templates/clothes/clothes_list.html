@@ -138,11 +138,11 @@
         {% for pledge in pledges %}
 
             <div class="clothe">
-                <a href="#">
+                <a href="{% url 'clothes:pledge_path' pledge.pk %}">
                     <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" alt="" width="220px">
                 </a>
                 <div class="name">
-                    <a href="#">{{ pledge.name }}</a>
+                    <a href="{% url 'clothes:pledge_path' pledge.id %}">{{ pledge.name }}</a>
                 </div>
                 
             </div>

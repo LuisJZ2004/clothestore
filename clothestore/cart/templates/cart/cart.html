@@ -1,0 +1,29 @@
+{% extends '../home/base_layout.html' %}
+{% load static %}
+{% block styles %}
+
+{% endblock styles %}
+
+
+{% block content %}
+
+<main>
+    <div class="cart-header">
+        <h2>total price: {{total_price}}</h2>
+        <a href="#">
+            <button>pay</button>
+        </a>
+    </div>
+
+    {% comment %} <div class="products">
+
+        {% for set in pledge_color_sets %}
+            <div class="product">
+
+            </div>
+        {% endfor %}
+
+    </div> {% endcomment %}
+</main>
+
+{% endblock content %}

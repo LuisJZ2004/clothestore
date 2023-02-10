@@ -6,6 +6,5 @@ app_name = 'clothes'
 urlpatterns = [
     path("<str:gender>/", ClothingTypeView.as_view(), name="clothes_by_gender"),
     path("<gender>/<slug>/", clothes_list_view, name="pledge_list_path"),
-    path("checkbox/<gender>/<slug>/", get_form_checkboxes, name="get_form_checkboxes_path"),
-    path("pledges/<pk>/", ShowPledge.as_view(), name="show_pledge")
+    path("pledges/<pk>", ShowPledge.as_view(), name="pledge_path")
 ]

@@ -149,6 +149,6 @@ def clothes_by_gender(request, gender):
 class ShowPledge(DetailView):
     model = Pledge
     template_name = "clothes/pledge.html"
-
+    context_object_name = "pledge"
     def get_object(self):
         return get_object_or_404(self.model, pk=self.kwargs.get('pk'))

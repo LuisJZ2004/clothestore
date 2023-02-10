@@ -12,7 +12,7 @@
 
     <div class="pledge-info">
         <figure>
-            <img src="{{ pledge.image.url }}" width='500px'>
+            <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" width='500px'>
         </figure>
         <ul>
             <li>brand: <a href="#">{{ pledge.brand.name }}</a> </li>

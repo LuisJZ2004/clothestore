@@ -37,7 +37,7 @@
             {% else %}
                 <a href="{% url 'accounts:login' %}">login</a>
             {% endif %}
-            <a href="#">cart</a>
+            <a href="{% url 'cart:cart_path' %}">cart</a>
         </div>
     </header>
 
