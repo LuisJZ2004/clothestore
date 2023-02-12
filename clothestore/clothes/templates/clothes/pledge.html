@@ -53,9 +53,9 @@
                 {% else %}
                     <li>price: {{ pledge.pledgecolorset_set.all.first.price }}$</li>
                 {% endif %}
-                <li>brand: <a href="#">{{ pledge.brand.name }}</a> </li>
-                <li>type: <a href="">{{ pledge.clothing_type.name }}</a></li>
-                <li>gender: <a href="">{{ pledge.gender }}</a></li>
+                <li>brand: <a href="{% url 'brands:show_brand' pledge.brand.slug %}">{{ pledge.brand.name }}</a> </li>
+                <li>type: <a href="{% url 'clothes:pledge_list_path' pledge.gender pledge.clothing_type.slug %}">{{ pledge.clothing_type.name }}</a></li>
+                <li>gender: <a href="{% url 'clothes:clothes_by_gender' pledge.gender %}">{{ pledge.gender }}</a></li>
                 <li>added date: {{ pledge.pub_date }}</li>
                 
             </ul>

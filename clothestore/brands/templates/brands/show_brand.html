@@ -21,7 +21,7 @@
                     {% for product in brand.pledge_set.all %}
                         <div class="each-product">
                             <img src="{{ product.image.url }}" alt="" width="160px">
-                            <a href="{% url 'clothes:show_pledge' product.pk %}">{{ product.name }}</a>
+                            <a href="{% url 'clothes:pledge_path' product.pk %}">{{ product.name }}</a>
                         </div>               
                     {% endfor %}
                 </div>
