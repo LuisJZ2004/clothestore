@@ -13,7 +13,7 @@
     <div class="pledge-info">
         
         {% if pledgecolorset_selected %}
-            <img src="{{ pledgecolorset_selected.image.url }}" alt="">
+            <img src="{{ pledgecolorset_selected.image.url }}" width='370px'>
         {% else %}
             <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" width='370px'>
         {% endif %}
@@ -34,7 +34,7 @@
 
         <div class="pledge-color-sets">
             {% for set in pledgecolorsets %}
-                    <a href="#">
+                    <a href="{% url 'clothes:pledge_path' pledge.pk %}?color={{set.color.name}}">
                         <img class="color-img" src="{{ set.color.image.url }}" alt="" width="80px" heigh="80px">
                     </a>
                 

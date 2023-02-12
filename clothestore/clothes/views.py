@@ -4,7 +4,7 @@ from django.http import Http404
 from django.views.generic import DetailView, ListView
 
 # This app
-from .models import ClothingType, Pledge
+from .models import ClothingType, Pledge, PledgeColorSet
 
 # My apps
 from extra_logic.clothes.functions import make_pagination, get_pagination_numbers
@@ -150,11 +150,23 @@ class ShowPledge(DetailView):
     model = Pledge
     template_name = "clothes/pledge.html"
     context_object_name = "pledge"
+
+    def dispatch(self, request, *args, **kwargs):
+
+        self.color = request.GET.get("color")
+
+        return super().dispatch(request, *args, **kwargs)
+
     def get_object(self):
         return get_object_or_404(self.model, pk=self.kwargs.get('pk'))
 
     def get_context_data(self, **kwargs):
+        pledgecolorset_selected = None
+        if self.color:
+            pledgecolorset_selected = get_object_or_404(PledgeColorSet, pledge=self.get_object(), color__name=self.color)
+
         return {
             self.context_object_name: self.get_object(),
             "pledgecolorsets": self.get_object().pledgecolorset_set.all(),
+            "pledgecolorset_selected": pledgecolorset_selected
         }
