@@ -12,20 +12,20 @@ class CartView(View):
 
     def post(self, request):
         cart = request.user.cart
-        print(request.POST)
-        print(request.POST.get("size"))
-
-        cart.cartpledge_set.create(
-            pledgecolorset = get_object_or_404(
-                PledgeColorSet, 
-                color__name=request.POST.get("color"), 
-                pledge__pk=request.POST.get("pledge"),
-            ),
-            size=get_object_or_404(
-                Size,
-                name=request.POST.get("size")
-            ),
-        )
+        try:
+            cart.cartpledge_set.create(
+                pledgecolorset = get_object_or_404(
+                    PledgeColorSet, 
+                    color__name=request.POST.get("color"), 
+                    pledge__pk=request.POST.get("pledge"),
+                ),
+                size=get_object_or_404(
+                    Size,
+                    name=request.POST.get("size")
+                ),
+            )
+        except ValueError:
+            pass
         return redirect(to="cart:cart_path")
 
     def get(self, request):
@@ -37,3 +37,6 @@ class CartView(View):
                 'total_price': cart.total_price()
             }
         )
+
+    def delete(self, request):
+        pass

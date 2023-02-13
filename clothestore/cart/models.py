@@ -1,6 +1,7 @@
 # Django
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 # My apps
 from clothes.models import PledgeColorSet, Size
@@ -28,3 +29,11 @@ class CartPledge(models.Model):
 
     def __str__(self) -> str:
         return f"{self.cart.__str__()} with {self.pledgecolorset.__str__()} with the size {self.size.name}"
+    
+    def save(self, *args, **kwargs) -> None:
+        try:
+            CartPledge.objects.get(cart=self.cart, pledgecolorset=self.pledgecolorset, size=self.size)
+            raise ValueError("object already in this cart")
+        except ObjectDoesNotExist:
+            return super().save(*args, **kwargs)
+        

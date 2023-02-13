@@ -13,7 +13,7 @@ def get_pagination_numbers(queryset: QuerySet, pagination_number: int):
 
     return final_number
 
-def remove_duplicates(queryset: QuerySet):
+def remove_duplicates(queryset: list):
     final_list = []
 
     for element in queryset:
