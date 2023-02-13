@@ -34,7 +34,8 @@ class CartView(View):
             request=request,
             template_name="cart/cart.html",
             context={
-                'total_price': cart.total_price()
+                'total_price': cart.total_price(),
+                'products': cart.cartpledge_set.all()
             }
         )
 

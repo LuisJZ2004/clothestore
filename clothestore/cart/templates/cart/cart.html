@@ -10,9 +10,39 @@
 <main>
     <div class="cart-header">
         <h2>total price: {{total_price}}</h2>
+        <h1> Your cart</h1>
         <a href="#">
             <button>pay</button>
         </a>
+    </div>
+
+    <div class="products">
+        {% if products %}
+            {% for product in products %}
+                <div class="product">
+                    <div class="image">
+                    <img src="{{ product.pledgecolorset.image.url }}" alt="" width="60px">
+                    </div>
+                    
+                    <div>
+                        <h2>{{ product.pledgecolorset.pledge.name }}</h2>
+                    </div>
+                    
+                    <div>
+                        <h2> {{ product.size.name }} </h2>
+                    </div>
+
+                    <div>
+                        <h2> {{ product.pledgecolorset.price }} </h2>
+                    </div>
+                    <form action="cart:cart_path" method="delete">
+                        <button>remove</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+        <h3>your cart is empty</h3>
+        {% endif %}
     </div>
 
     {% comment %} <div class="products">
