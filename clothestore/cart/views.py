@@ -1,9 +1,32 @@
-from django.shortcuts import render
+# Djnago
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
+# My apps
+from clothes.models import PledgeColorSet, Size
+
+# Thist app
 from .models import Cart
 
 class CartView(View):
+
+    def post(self, request):
+        cart = request.user.cart
+        print(request.POST)
+        print(request.POST.get("size"))
+
+        cart.cartpledge_set.create(
+            pledgecolorset = get_object_or_404(
+                PledgeColorSet, 
+                color__name=request.POST.get("color"), 
+                pledge__pk=request.POST.get("pledge"),
+            ),
+            size=get_object_or_404(
+                Size,
+                name=request.POST.get("size")
+            ),
+        )
+        return redirect(to="cart:cart_path")
 
     def get(self, request):
         cart = request.user.cart

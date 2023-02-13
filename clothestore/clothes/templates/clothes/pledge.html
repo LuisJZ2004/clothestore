@@ -9,7 +9,16 @@
     <div class='tittle'>
         <h3>{{ pledge.name }}</h3>
     </div>
-<form action="">
+<form name="formclass" action="{% url 'cart:cart_path' %}" method="POST">
+    {% csrf_token %}
+    {% comment %} Hiddens {% endcomment %}
+    <input type="hidden" name="pledge" value={{ pledge.pk }}>
+    {% if pledgecolorset_selected %}
+    <input id="prodId" name="color" type="hidden" value={{ pledgecolorset_selected.color.name }}>
+    {% else %}
+    <input id="prodId" name="color" type="hidden" value={{ pledge.pledgecolorset_set.all.first.color.name }}>
+    {% endif %}
+
     <div class="pledge-info">
         
         {% if pledgecolorset_selected %}
@@ -21,13 +30,13 @@
         {% if pledgecolorset_selected %}
             <select name="size" class="sizes">
                 {% for size in pledgecolorset_selected.sizes.all %}
-                    <option value="{{size.name}}">{{size.name}}</option>
+                    <option value={{size.name}}>{{size.name}}</option>
                 {% endfor %}
             </select>
         {% else %}
-            <select class="sizes">
+            <select name="size" class="sizes">
                 {% for size in pledge.pledgecolorset_set.all.first.sizes.all %}
-                    <option value="{{size.name}}">{{size.name}}</option>
+                    <option value={{size.name}}>{{size.name}}</option>
                 {% endfor %}
             </select>
         {% endif %}
