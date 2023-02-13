@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView
 from .models import ClothingType, Pledge, PledgeColorSet
 
 # My apps
-from extra_logic.clothes.functions import make_pagination, get_pagination_numbers
+from extra_logic.clothes.functions import make_pagination, get_pagination_numbers, remove_duplicates
 from extra_logic.clothes.classes import Filter, QuantityOfAField
 
 class ClothingTypeView(ListView):
@@ -63,6 +63,7 @@ def clothes_list_view(request, gender, slug):
         pledges = filtering.get_queryset_filtered(pledges.distinct(), filters["fields"], order=filters["order"])
         query_len = len(pledges)
 
+    pledges = remove_duplicates(pledges)
     quantities = QuantityOfAField().get_quantity_of_each_field(pledges, selected_color, selected_size)
     
     if page and page != 0:

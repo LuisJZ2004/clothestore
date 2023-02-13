@@ -12,3 +12,12 @@ def get_pagination_numbers(queryset: QuerySet, pagination_number: int):
             final_number += 1
 
     return final_number
+
+def remove_duplicates(queryset: QuerySet):
+    final_list = []
+
+    for element in queryset:
+        if element not in final_list:
+            final_list.append(element)
+
+    return final_list
