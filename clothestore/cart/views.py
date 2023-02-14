@@ -9,6 +9,7 @@ from clothes.models import PledgeColorSet, Size
 
 # Thist app
 from .models import Cart
+from .forms import PaymentForm
 
 class CartView(View):
 
@@ -50,3 +51,40 @@ class DeleteProductView(View):
             return redirect(to="cart:cart_path")
         except ObjectDoesNotExist:
             raise Http404()
+
+def payment_view(request):
+    if request.user.cart.products.all():
+        form = PaymentForm()
+        
+        if request.method == 'POST':
+            form = PaymentForm(request.POST)
+            if form.is_valid():
+                try:
+                    card_number = int(request.POST["card_number"])
+                    cvv = int(request.POST["cvv"])
+                except:
+                    return render(request, 'cart/payment.html', 
+                        context= {
+                            "number_error": True,
+                            "form": PaymentForm(),
+                        }
+                    )
+                request.user.cart.products.clear()
+
+                return render(request, 'cart/payment.html', {"confirm_message": True})
+            else:
+                return render(
+                    request, 
+                    'cart/payment.html',
+                    context={
+                        'form': PaymentForm(),
+                        'errors': form.errors,
+                    }
+                )
+        return render(
+            request, 
+            'cart/payment.html', 
+            {'form': form}
+        )
+    else:
+        return redirect(to="cart:cart_path")

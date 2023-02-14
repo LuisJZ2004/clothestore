@@ -1,0 +1,53 @@
+section {
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section h1 {
+    padding: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2.0rem;
+    color: rgb(238, 243, 247);
+}
+
+section div {
+    min-height: 237px;
+    max-height: 300px;
+    padding: 20px;
+    border: 2px solid black;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+section div h1{
+    color: rgb(231, 77, 77);
+    font-size: 1.5rem;
+}
+
+label {
+    font-size: 1.5rem;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    max-width: 100px;
+}
+
+#id_card_number {
+    padding: 5px;
+    width: 140px;
+}
+
+#id_cvv {
+    padding: 10px;
+    width:50px;
+}
+
+select {
+    width: 60px;
+}
+
+form button {
+    width: 50px;
+}

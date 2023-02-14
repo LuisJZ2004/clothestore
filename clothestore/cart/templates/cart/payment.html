@@ -1,0 +1,34 @@
+{% extends '../home/base_layout.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'cart/css/payment_1.css' %}">
+{% endblock styles %}
+
+{% block content %}
+    <form class="payment-form" action="{% url 'cart:payment_path' %}" method="POST">
+        {% csrf_token %}
+        <section>
+            {% if confirm_message %}
+            <h1 class="message">Your purchase has been successful</h1>
+            {% else %}
+            
+            <div>
+                {% if number_error %}
+                <h1>Please, make sure you are typing the right numbers</h1>
+                {% endif %}
+                <label for="id_card_number">{{ form.card_number.label }}</label>
+                {{ form.card_number }}
+                <label for="id_exp_month">{{ form.exp_month.label }}</label>
+                {{ form.exp_month }}
+                <label for="id_exp_year">{{ form.exp_year.label }}</label>
+                {{ form.exp_year }}
+                <label for="id_cvv">{{ form.cvv.label }}</label>
+                {{ form.cvv }}
+                <button type="submit">pay</button>
+            </div>
+            {% endif %}                
+        </section>
+            
+    </form>
+    {{errors}}
+{% endblock content %}
