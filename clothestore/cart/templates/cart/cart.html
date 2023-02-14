@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'cart/css/cart_1.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'cart/css/cart_2.css' %}" type="text/css">
 {% endblock styles %}
 
 
@@ -18,30 +18,58 @@
 
     <div class="products">
         {% if products %}
+            <div class="product">
+                    <div class="image-title">
+                        <h2>Images</h2>
+                    </div>
+                        
+                    <div class="name">
+                        <h2>Names</h2>
+                    </div>
+                        
+                    <div class="size">
+                        <h2>Sizes</h2>
+                    </div>
+
+                    <div class="price">
+                        <h2>Prices</h2>
+                    </div>
+                    <div class="remove">
+                        <h2>Remove</h2>
+                    </div>
+            </div>
+
+        
             {% for product in products %}
                 <div class="product">
                     <div class="image">
-                    <img src="{{ product.pledgecolorset.image.url }}" alt="" width="60px">
+                    <img src="{{ product.pledgecolorset.image.url }}" alt="" width="100px">
                     </div>
                     
-                    <div>
-                        <h2>{{ product.pledgecolorset.pledge.name }}</h2>
+                    <div class="name">
+                        <a href="{% url 'clothes:pledge_path' product.pledgecolorset.pledge.id %}?color={{product.pledgecolorset.color.name}}">
+                            <h2>{{ product.pledgecolorset.pledge.name }}</h2>
+                        </a>
                     </div>
                     
-                    <div>
+                    <div class="size">
                         <h2> {{ product.size.name }} </h2>
                     </div>
 
-                    <div>
+                    <div class="price">
                         <h2> {{ product.pledgecolorset.price }} </h2>
                     </div>
-                    <form action="cart:cart_path" method="delete">
-                        <button>remove</button>
+                    <form action="{% url 'cart:delete_product_path' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value={{product.id}}>
+                        <button type="submit">remove</button>
                     </form>
                 </div>
             {% endfor %}
         {% else %}
-        <h3>your cart is empty</h3>
+        <div class="empty">
+            <h3>your cart is empty</h3>
+        </div>
         {% endif %}
     </div>
 
