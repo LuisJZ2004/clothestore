@@ -1,18 +1,23 @@
 .container {
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     max-width: 1250px;
     margin: 0 auto;
 }
 
 .container h1 {
-    text-align: center;
+    width: 150px;
     font-size: 3.5rem;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
 }
 
 .container .brands {
-    border: 1px solid black;
+    border: 2px solid black;
+    width: 1040px;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -21,16 +26,23 @@
 }
 
 .container .brands .each-brand {
-    border: 1px solid black;
-    width: 230px;
+    width: 225px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .container .brands .each-brand img{
     align-self: center;
 }
-.container .brands .each-brand a {
+/* .container .brands .each-brand .name {
     text-align: center;
     font-size: 2.3rem;
     text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:#3597e7
 }
+
+.container .brands .each-brand .name:hover{
+    color: white;
+} */

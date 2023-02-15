@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'brands/css/all_brands.css' %}">
+<link rel="stylesheet" href="{% static 'brands/css/all_brands_1.css' %}">
 {% endblock styles %}
 
 
@@ -13,10 +13,12 @@
     <div class="brands">
         {% for brand in brands %}
             <div class="each-brand">
-                <img src="{{ brand.image.url }}" width="220px">
-                <a href="{% url 'brands:show_brand' brand.slug %}" >
-                    {{ brand.name }}
+                <a href="{% url 'brands:show_brand' brand.slug %}">
+                    <img src="{{ brand.image.url }}" width="220px">
                 </a>
+                {% comment %} <a href="{% url 'brands:show_brand' brand.slug %}" class="name">
+                    {{ brand.name }}
+                </a> {% endcomment %}
             </div>
             
         {% endfor %}
