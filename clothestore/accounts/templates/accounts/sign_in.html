@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'accounts/css/sign_in.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/css/sign_in_1.css' %}">
 {% endblock styles %}
 
 {% block content %}
@@ -15,14 +15,32 @@
         {% csrf_token %}
         {% comment %} <input type="text" id="login" class="fadeIn second" name="login" placeholder="login"> {% endcomment %}
         
+        {% if errors.first_name %}
+          <h1 class="error-name">{{errors.first_name.0}}</h1>
+        {% endif %}
         {{form.first_name}}
+        {% if errors.last_name %}
+          <h1 class="error-name">{{errors.last_name.0}}</h1>
+        {% endif %}
         {{form.last_name}}
+        {% if errors.username %}
+          <h1 class="error-name">{{errors.username.0}}</h1>
+        {% endif %}
         {{form.username}}
+        {% if errors.email %}
+          <h1 class="error-name">{{errors.email.0}}</h1>
+        {% endif %}
         {{form.email}}
         <br>
+        {% if errors.password1 %}
+          <h1 class="error-name">{{errors.password1.0}}</h1>
+        {% endif %}
         <label for="password1-id">password 1</label>
         {{form.password1}}
         <br>
+        {% if errors.password2 %}
+          <h1 class="error-name">{{errors.password2.0}}</h1>
+        {% endif %}
         <label for="password2-id">password 2</label>
         {{form.password2}}
         <input type="submit" class="fadeIn fourth" value="Sign In", id="register-buttom">

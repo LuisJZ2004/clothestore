@@ -18,12 +18,18 @@ def sign_in(request):
             form.save()
             Cart.objects.create(user=User.objects.get(username=request.POST["username"]))
             return redirect(to="accounts:login")
+        else:
+            print(dict(form.errors))
+            context = {
+                'form': form,
+                'errors': dict(form.errors),
+            }
     else:
         form = UserRegisterForm()
-
-    context = {
-        'form': form,
-    }
+        context = {
+            'form': form,
+        }
+    
     return render(
         request=request,
         template_name="accounts/sign_in.html",
