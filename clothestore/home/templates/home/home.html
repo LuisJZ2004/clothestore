@@ -5,18 +5,25 @@
 {% endblock styles %}
 
 {% block content %}
-    <h1>DISCOVER</h1>
+    <h1 class="discover">DISCOVER</h1>
 
     <div class="homesets-container">
         {% for homeset in home_sets %}
             <div class="homeset">
                 <h2>{{homeset.name}}</h2>
-                {% for product in homeset.pledges.all %}
-                    <div class="product">
-                        <img src="{{ product.pledgecolorset_set.filter.first.image.url }}" width="150px">
-                        <h3>{{product.name}}</h3>
-                    </div>
-                {% endfor %}
+
+                <div class="products">
+                    {% for product in homeset.pledges.all %}
+                        <div class="product">
+                            <a href="{% url 'clothes:pledge_path' product.id %}">
+                                <img src="{{ product.pledgecolorset_set.filter.first.image.url }}" width="150px">
+                            </a>    
+                            <a class="name" href="{% url 'clothes:pledge_path' product.id %}">
+                                {{product.name}}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         {% endfor %}
     </div>
