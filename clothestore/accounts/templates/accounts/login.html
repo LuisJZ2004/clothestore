@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/css/login_1.css' %}">
 {% endblock styles %}
 
 {% block content %}
@@ -19,6 +19,9 @@
       <!-- Login Form -->
       <form method='POST'>
         {% csrf_token %}
+        {% if errors %}
+        <h1 class="error-message">Username or password is not correct</h1>
+        {% endif %}
         {% comment %} <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
         <input type="text" id="password" class="fadeIn third" name="login" placeholder="password"> {% endcomment %}
 

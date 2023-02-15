@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
 
 # My apps
 from cart.models import Cart
@@ -28,3 +29,7 @@ def sign_in(request):
         template_name="accounts/sign_in.html",
         context=context
     )
+
+class CustomLoginView(LoginView):
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form, errors=form.errors))
