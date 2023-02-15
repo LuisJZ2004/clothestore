@@ -2,14 +2,13 @@
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'brands/css/show_brand.css' %}">
+<link rel="stylesheet" href="{% static 'brands/css/show_brand_1.css' %}">
 {% endblock styles %}
 
 {% block content %}
 <div class="container">
     <div class="brand-info">
         <img src="{{ brand.image.url }}" width="260px">
-        <h1>{{ brand.name }}</h1>
     </div>
 
     
@@ -20,8 +19,10 @@
                 <div class="brand-products">
                     {% for product in brand.pledge_set.all %}
                         <div class="each-product">
-                            <img src="{{ product.image.url }}" alt="" width="160px">
-                            <a href="{% url 'clothes:pledge_path' product.pk %}">{{ product.name }}</a>
+                            <a href="{% url 'clothes:pledge_path' product.pk %}">
+                                <img src="{{ product.pledgecolorset_set.all.first.image.url }}" alt="" width="200px">
+                            </a>
+                            <a class="name" href="{% url 'clothes:pledge_path' product.pk %}">{{ product.name }}</a>
                         </div>               
                     {% endfor %}
                 </div>
