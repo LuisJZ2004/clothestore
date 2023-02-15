@@ -1,1 +1,23 @@
 {% extends 'home/base_layout.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+{% endblock styles %}
+
+{% block content %}
+    <h1>DISCOVER</h1>
+
+    <div class="homesets-container">
+        {% for homeset in home_sets %}
+            <div class="homeset">
+                <h2>{{homeset.name}}</h2>
+                {% for product in homeset.pledges.all %}
+                    <div class="product">
+                        <img src="{{ product.pledgecolorset_set.filter.first.image.url }}" width="150px">
+                        <h3>{{product.name}}</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
