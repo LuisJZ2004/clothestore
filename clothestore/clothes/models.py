@@ -1,13 +1,14 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from django.core.exceptions import ObjectDoesNotExist, FieldError
 
 from brands.models import Brand
 
 # Create your models here.
 
 class ClothingType(models.Model):
-    name = models.CharField(max_length=25, blank=False, unique=True)
+    name = models.CharField(max_length=25, blank=False)
     slug = models.SlugField(editable=False)
     image = models.ImageField(null=False)
     gender = models.CharField(choices= (
@@ -20,6 +21,13 @@ class ClothingType(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+
+        try:
+            ClothingType.objects.get(name=self.name, gender=self.gender, image=self.image)
+            raise FieldError("Object already in data")
+        except ObjectDoesNotExist:
+            pass
+
         super().save(*args, **kwargs)
 
 
@@ -61,7 +69,12 @@ class Size(models.Model):
 
 class Color(models.Model):
     name = models.CharField(max_length=30, unique=True, blank=False)
+    slug = models.SlugField(unique=True, blank=False, null=True, editable=False)
     image = models.ImageField(null=False)
 
     def __str__(self) -> str:
         return self.name
+
+    def save(self, *args, **kwargs) -> None:
+        self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)

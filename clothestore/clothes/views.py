@@ -164,7 +164,7 @@ class ShowPledge(DetailView):
     def get_context_data(self, **kwargs):
         pledgecolorset_selected = None
         if self.color:
-            pledgecolorset_selected = get_object_or_404(PledgeColorSet, pledge=self.get_object(), color__name=self.color)
+            pledgecolorset_selected = get_object_or_404(PledgeColorSet, pledge=self.get_object(), color__slug=self.color)
 
         return {
             self.context_object_name: self.get_object(),

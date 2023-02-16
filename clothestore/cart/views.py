@@ -19,7 +19,7 @@ class CartView(View):
             cart.cartpledge_set.create(
                 pledgecolorset = get_object_or_404(
                     PledgeColorSet, 
-                    color__name=request.POST.get("color"), 
+                    color__slug=request.POST.get("color"), 
                     pledge__pk=request.POST.get("pledge"),
                 ),
                 size=get_object_or_404(

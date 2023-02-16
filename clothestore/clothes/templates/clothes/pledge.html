@@ -14,9 +14,9 @@
     {% comment %} Hiddens {% endcomment %}
     <input type="hidden" name="pledge" value={{ pledge.pk }}>
     {% if pledgecolorset_selected %}
-    <input id="prodId" name="color" type="hidden" value={{ pledgecolorset_selected.color.name }}>
+    <input id="prodId" name="color" type="hidden" value={{ pledgecolorset_selected.color.slug }}>
     {% else %}
-    <input id="prodId" name="color" type="hidden" value={{ pledge.pledgecolorset_set.all.first.color.name }}>
+    <input id="prodId" name="color" type="hidden" value={{ pledge.pledgecolorset_set.all.first.color.slug }}>
     {% endif %}
 
     <div class="pledge-info">
@@ -43,7 +43,7 @@
 
         <div class="pledge-color-sets">
             {% for set in pledgecolorsets %}
-                    <a href="{% url 'clothes:pledge_path' pledge.pk %}?color={{set.color.name}}">
+                    <a href="{% url 'clothes:pledge_path' pledge.pk %}?color={{set.color.slug}}">
                         <img class="color-img" src="{{ set.color.image.url }}" alt="" width="80px" heigh="80px">
                     </a>
                 
