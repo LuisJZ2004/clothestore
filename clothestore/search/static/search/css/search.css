@@ -1,0 +1,55 @@
+.container {
+    border: 2px solid black;
+    padding: 20px;
+    padding-top: 15px;
+    max-width: 950px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.container .tittle {
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.container .tittle h1{
+    font-size: 2.7rem;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container .pledges-container {
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.container .product {
+    width: 202px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.container .product img{
+    border: 2px solid black;
+}
+
+.container .product .name {
+    margin: 5px;
+    text-decoration: none;
+    font-size: 2.3rem;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(77, 214, 214)
+}
+
+.container .product .name:hover {
+    color: white;
+}

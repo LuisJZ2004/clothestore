@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'search/css/search_styles.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'search/css/search.css' %}" type="text/css">
 {% endblock styles %}
 
 {% block content %}
@@ -10,26 +10,20 @@
             <div class="tittle">
                 <h1>Results of "{{ search }}"</h1>
             </div>
-            {% for pledge in pledges %}
-                <div class='product'>
-                    <span>
-                        <img src="{{ pledge.image.url }}" alt="" width="200px">
-                    </span>
-                    <a href="{% url 'clothes:show_pledge' pledge.pk %}">
-                        {{pledge.name}}
-                    </a>
-                </div>
-            {% endfor %}
-            {% for brand in brands %}
-                <div class='brand'>
-                    <span>
-                        <img src="{{ brand.image.url }}" alt="" width="170px">
-                    </span>
-                    <a href="{% url 'brands:show_brand' brand.slug %}">
-                        {{brand.name}}
-                    </a>
-                </div>
-            {% endfor %}
+            <div class="pledges-container">
+                {% for pledge in pledges %}
+                    <div class='product'>
+                        <a href="{% url 'clothes:pledge_path' pledge.pk %}">
+                            <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" width="200px">
+                        </a>
+                        <a class="name" href="{% url 'clothes:pledge_path' pledge.pk %}">
+                            {{pledge.name}}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+             
+
         {% else %}
             <div class="tittle">
                 <h1>No results for "{{ search }}"</h1>

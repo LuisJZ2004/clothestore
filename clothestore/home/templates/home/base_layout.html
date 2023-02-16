@@ -20,7 +20,7 @@
             <form action="{% url 'search:search_object' %}" method="GET">
                 {% csrf_token %}
                 <input type="search" class="search_bar" name='search-bar' placeholder='  search'>
-                <input type="submit">
+                <input type="submit" value="search">
             </form>
         </div>
 

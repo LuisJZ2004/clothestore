@@ -14,16 +14,12 @@ def search_object(request):
             Q(name__icontains = search) |
             Q(description__icontains = search)
         )
-        brands = Brand.objects.filter(
-            name__icontains = search
-        )
     else:
         return redirect(to="home:home_page")
 
     context = {
         'search': search,
         'pledges': pledges,
-        'brands': brands,
     }
 
     return render(
