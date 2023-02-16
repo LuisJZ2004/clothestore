@@ -16,7 +16,7 @@ class ClothingType(models.Model):
     ), max_length=10, blank=False)
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.gender} {self.name}"
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -50,7 +50,7 @@ class PledgeColorSet(models.Model):
         return f" '{self.pledge.name}' in color '{self.color.name}' "
 
 class Size(models.Model):
-    name = models.CharField(max_length=3, unique=True, blank=False)
+    name = models.CharField(max_length=4, unique=True, blank=False)
 
     def __str__(self) -> str:
         return self.name
