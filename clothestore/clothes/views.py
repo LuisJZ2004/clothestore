@@ -61,9 +61,9 @@ def clothes_list_view(request, gender, slug):
         }
         filtering = Filter()
         pledges = filtering.get_queryset_filtered(pledges.distinct(), filters["fields"], order=filters["order"])
-        query_len = len(pledges)
 
-    pledges = remove_duplicates(pledges)
+    pledges = remove_duplicates(pledges.distinct())
+    query_len = len(pledges)
     page_numbers = range(1, get_pagination_numbers(pledges, 5)+1)
     quantities = QuantityOfAField().get_quantity_of_each_field(pledges, selected_color, selected_size)
     

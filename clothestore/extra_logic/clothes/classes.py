@@ -10,6 +10,9 @@ from django.core.exceptions import FieldError
 # My apps
 from clothes.models import PledgeColorSet
 
+# this app
+from .functions import remove_duplicates
+
 class Filter:
     """
     Makes a new queryset from fields sended to filter.
@@ -57,7 +60,6 @@ class Filter:
                     return queryset.filter(self.__get_Q_queries_in_AND(fields)).order_by(order)
                 except FieldError:
                     pass
-            print(self.__get_Q_queries_in_AND(fields))
             return queryset.filter(self.__get_Q_queries_in_AND(fields))
         elif order:
             return queryset.order_by(order)
@@ -182,9 +184,18 @@ class QuantityOfAField:
         """
         pledgecolorsets = self.__get_pledgecolorset_instances(pledges, selected_color, selected_size)
         colorsets = self.__get_pledgecolorset_instances_separated(pledgecolorsets)
+        
+        final_pledge_sizes = {}
+        for colorset in colorsets:
+            if final_pledge_sizes.get(colorset.pledge.pk):
+                final_pledge_sizes[colorset.pledge.pk].extend(list(colorset.sizes.all()))
+            else:
+                final_pledge_sizes[colorset.pledge.pk] = list(colorset.sizes.all())
+        
+        for pledge_primary_key, size_list in final_pledge_sizes.items():
+            final_pledge_sizes[pledge_primary_key] = remove_duplicates(size_list)
 
-        return [colorset.sizes.all() for colorset in colorsets]
-
+        return  final_pledge_sizes.values()
 
     def __get_complete_list_with_repeated_size_names(self, pledges: QuerySet, selected_color, selected_size):
         """
