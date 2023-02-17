@@ -64,10 +64,15 @@ def clothes_list_view(request, gender, slug):
         query_len = len(pledges)
 
     pledges = remove_duplicates(pledges)
+    page_numbers = range(1, get_pagination_numbers(pledges, 5)+1)
     quantities = QuantityOfAField().get_quantity_of_each_field(pledges, selected_color, selected_size)
     
     if page and page != 0:
+        aux = pledges
         pledges = make_pagination(pledges, page, 5)
+        if not pledges:
+            pledges = make_pagination(aux, 1, 5)
+            page_numbers = range(1, get_pagination_numbers(aux, 5)+1)
     else:
         pledges = make_pagination(pledges, 1, 5)
 
