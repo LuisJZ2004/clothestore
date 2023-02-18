@@ -1,0 +1,124 @@
+/* Filters */
+.main-container .filters {
+    border: 2px solid black;
+    padding: 20px;
+    min-height: 100px; 
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.main-container .filters .filter-tittle {
+    padding: 10px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.main-container .filters .filter-tittle h2 {
+    font-size: 1.9rem;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.main-container .filters .filter-checkboxes {
+    width: 40px;
+    font-size: 1.5rem;
+}
+
+.main-container .filters span {
+    font-size: 1.7rem;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #d0d9e6;
+}
+
+.main-container .filters .checkbox-label {
+    padding: 4px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    border: 1px solid black;
+}
+
+.main-container .filters .colors{
+    border: 2px solid black;
+    max-width: 175px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.main-container .filters .sizes{
+    border: 2px solid black;
+    width: 150px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.main-container {
+    border: 2px solid black;
+    display: flex;
+}
+
+.order-select {
+    width:170px;
+}
+
+/* Clothes */
+.main-container .list-clothes {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 15px;
+    border: 2px solid black;
+    max-height: 960px;
+    min-width: 500px;
+    max-width: 900px;
+    margin: 0px auto;
+    margin-top: 10px;
+}
+.clothe {
+    padding: 10px;
+    max-width: 240px;
+    max-height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid black;
+}
+.clothe .name {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    max-width: 90%;    
+    margin-top:5px;
+}
+
+.clothe .name a{
+    font-family: monospace;
+    font-size: 1.6rem;
+    color: #bbcbe3;
+}
+
+.clothe .name a:hover {
+    color:white;
+}
+
+/* pagination */
+.pages {
+    border: 2px solid black;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pages .submit-button {
+    width:25px;
+    height: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
