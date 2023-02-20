@@ -24,16 +24,16 @@ class ClothingTypeView(ListView):
             
     
 def clothes_list_view(request, gender, slug):
-    pledges = Pledge.objects.filter(clothing_type__slug=slug, gender=gender)
+    sets = PledgeColorSet.objects.filter(pledge__clothing_type__slug=slug, pledge__gender=gender)
 
     orders = {
         "pub date": "-pub_date",
         "A-Z": "name",
         "Z-A": "-name",
-        "price (higher to lower)": "-pledgecolorset__price",
-        "price (lower to higher)": "pledgecolorset__price"
+        "price (higher to lower)": "-price",
+        "price (lower to higher)": "price"
     }
-    page_numbers = range(1, get_pagination_numbers(pledges, 5)+1)
+    page_numbers = range(1, get_pagination_numbers(sets, 5)+1)
     page = None
 
     selected_color = None
@@ -54,33 +54,33 @@ def clothes_list_view(request, gender, slug):
 
         filters = {
             "fields": {
-                "pledgecolorset__sizes__name": selected_size,
-                "pledgecolorset__color__name": selected_color,
+                "sizes__name": selected_size,
+                "color__name": selected_color,
             },
             "order": request.POST.get("order"),
         }
         filtering = Filter()
-        pledges = filtering.get_queryset_filtered(pledges.distinct(), filters["fields"], order=filters["order"])
+        sets = filtering.get_queryset_filtered(sets.distinct(), filters["fields"], order=filters["order"])
 
-    pledges = remove_duplicates(pledges.distinct())
-    query_len = len(pledges)
-    page_numbers = range(1, get_pagination_numbers(pledges, 5)+1)
-    quantities = QuantityOfAField().get_quantity_of_each_field(pledges, selected_color, selected_size)
+    # sets = remove_duplicates(sets.distinct())
+    query_len = len(sets)
+    page_numbers = range(1, get_pagination_numbers(sets, 5)+1)
+    quantities = QuantityOfAField().get_quantity_of_each_field(sets, selected_color, selected_size)
     
     if page and page != 0:
-        aux = pledges
-        pledges = make_pagination(pledges, page, 5)
-        if not pledges:
-            pledges = make_pagination(aux, 1, 5)
+        aux = sets
+        sets = make_pagination(sets, page, 5)
+        if not sets:
+            sets = make_pagination(aux, 1, 5)
             page_numbers = range(1, get_pagination_numbers(aux, 5)+1)
     else:
-        pledges = make_pagination(pledges, 1, 5)
+        sets = make_pagination(sets, 1, 5)
 
     return render(
         request=request,
         template_name="clothes/clothes_list.html",
         context={
-            "pledges": pledges,
+            "sets": sets,
             "gender": gender,
             "clothing_type_slug": slug,
             "colors": quantities["colors"],
@@ -138,7 +138,7 @@ def clothes_by_gender(request, gender):
 
     context = {
         'gender': gender,
-        'pledges': clothes,
+        'sets': clothes,
         'type_clothing': typeclothing,
         'orders': orders,
 
