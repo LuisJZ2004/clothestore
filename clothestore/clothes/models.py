@@ -39,7 +39,6 @@ class Pledge(models.Model):
         ('M','Man'),
         ('W', 'Woman'),
     ), max_length=10, blank=False)
-    pub_date = models.DateField(default=timezone.now().date())
     description = models.TextField(max_length=1000, blank=False, null=True)
 
     def __str__(self) -> str:

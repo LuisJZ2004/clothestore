@@ -10,7 +10,7 @@ class Home(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = {
-            "home_sets": HomeSet.objects.all().order_by("pub_date")
+            "home_sets": HomeSet.objects.all().order_by("-pub_date")
         } 
         return context
     
