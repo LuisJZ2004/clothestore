@@ -60,7 +60,7 @@ class Filter:
                     return queryset.filter(self.__get_Q_queries_in_AND(fields)).order_by(order)
                 except FieldError:
                     pass
-            return queryset.filter(self.__get_Q_queries_in_AND(fields))
+            return queryset.filter(self.__get_Q_queries_in_AND(fields)).order_by("-pub_date")
         elif order:
             return queryset.order_by(order)
         else:

@@ -51,6 +51,7 @@ class PledgeColorSet(models.Model):
 
     price = models.FloatField(blank=False)
     image = models.ImageField(null=False)
+    pub_date = models.DateTimeField(default=timezone.now())
 
     sizes = models.ManyToManyField(to="Size")
 

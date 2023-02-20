@@ -24,12 +24,13 @@ class ClothingTypeView(ListView):
             
     
 def clothes_list_view(request, gender, slug):
-    sets = PledgeColorSet.objects.filter(pledge__clothing_type__slug=slug, pledge__gender=gender)
+    sets = PledgeColorSet.objects.filter(pledge__clothing_type__slug=slug, pledge__gender=gender).order_by("-pub_date")
 
     orders = {
-        "pub date": "-pub_date",
-        "A-Z": "name",
-        "Z-A": "-name",
+        "pub date (old to lastest)": "pub_date",
+        "pub date (lastest to old)": "-pub_date",
+        "A-Z": "pledge__name",
+        "Z-A": "-pledge__name",
         "price (higher to lower)": "-price",
         "price (lower to higher)": "price"
     }
