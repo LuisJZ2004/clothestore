@@ -22,9 +22,9 @@
     <div class="pledge-info">
         
         {% if pledgecolorset_selected %}
-            <img src="{{ pledgecolorset_selected.image.url }}" width='370px'>
+            <img src="{{ pledgecolorset_selected.image.url }}" width='280px'>
         {% else %}
-            <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" width='370px'>
+            <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" width='280px'>
         {% endif %}
         
         {% if pledgecolorset_selected %}
