@@ -1,7 +1,7 @@
 {% extends '../home/base_layout.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_11.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'clothes/css/pledge_list_12.css' %}" type="text/css">
 {% endblock styles %}
 
 {% block content %}
@@ -139,7 +139,7 @@
 
             <div class="clothe">
                 <a href="{% url 'clothes:pledge_path' pledge.pk %}">
-                    <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" alt="" width="220px">
+                    <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" alt="" width="200px">
                 </a>
                 <div class="name">
                     <a href="{% url 'clothes:pledge_path' pledge.id %}">{{ pledge.name }}</a>
