@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import ClothingTypeView, clothes_by_gender, ShowPledge, clothes_list_view, get_form_checkboxes
+from .views import ClothingTypeView, ShowPledge, clothes_list_view
 
 app_name = 'clothes'
 urlpatterns = [

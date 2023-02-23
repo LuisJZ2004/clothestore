@@ -6,6 +6,9 @@ from .models import Brand
 # Create your views here.
 
 class AllBrands(ListView):
+    """
+    Shows every brand in DB
+    """
     model = Brand
     template_name = "brands/all_brands.html"
     context_object_name = "brands"
@@ -14,6 +17,9 @@ class AllBrands(ListView):
         return Brand.objects.all()
 
 class ShowBrand(DetailView):
+    """
+    Shows all the products from a respective brand
+    """
     model = Brand
     template_name = "brands/show_brand.html"
 

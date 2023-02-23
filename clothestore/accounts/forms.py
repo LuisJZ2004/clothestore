@@ -4,6 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class UserRegisterForm(UserCreationForm):
+    """
+    Form to sign in
+    """
     first_name = forms.CharField(max_length=150, required=True, 
                 widget= forms.TextInput(attrs={
                     "placeholder": 'First Name'

@@ -38,4 +38,5 @@ def sign_in(request):
 
 class CustomLoginView(LoginView):
     def form_invalid(self, form):
+        # In the default LoginView it doesn't return the errors if any, so I send them if the form is not valid
         return self.render_to_response(self.get_context_data(form=form, errors=form.errors))

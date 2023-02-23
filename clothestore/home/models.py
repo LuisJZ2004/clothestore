@@ -6,6 +6,9 @@ from django.utils import timezone
 from clothes.models import Pledge
 
 class HomeSet(models.Model):
+    """
+    Set of products that will be in the main page
+    """
     name = models.CharField(max_length=60, unique=True, blank=False, null=False)
     pub_date = models.DateTimeField(default=timezone.now(), blank=False, null=False)
 

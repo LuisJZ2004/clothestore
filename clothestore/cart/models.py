@@ -31,6 +31,8 @@ class CartPledge(models.Model):
         return f"{self.cart.__str__()} with {self.pledgecolorset.__str__()} with the size {self.size.name}"
     
     def save(self, *args, **kwargs) -> None:
+
+        # It can't be added the same product more than one time
         try:
             CartPledge.objects.get(cart=self.cart, pledgecolorset=self.pledgecolorset, size=self.size)
             raise ValueError("object already in this cart")
