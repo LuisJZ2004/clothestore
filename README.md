@@ -53,4 +53,6 @@ The main page. The base layout HTML is in this app. It has only one view, the on
 #### search
 Searching products through the search bar in the header is the goal of this app.
 
+------------
+
 This was a brief introduction about what this project is and does. Feel free to prove the page/result of all I wrote and also read all you can the code. I'm overt to any critic to get better and grow up, feel free to that too.
