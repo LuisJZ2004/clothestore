@@ -1,6 +1,8 @@
 # Closet
 'Closet' is a simple and not so simple clothes ecommerce made with Django. This ecommerce counts with search, cart, user register and filtering systems. It was an old project I took up and got it better.
 
+Video of the project: https://youtu.be/pIR4yR-1W8M
+
 ## Required knowledge
 - Intermediate/advanced Python and Django.
 - Basic HTML and CSS.
