@@ -15,6 +15,7 @@ def search_object_view(request):
             Q(color__name__icontains = search) |
             Q(pledge__brand__name__icontains = search) 
         ).distinct()
+        pledges = sorted(pledges, key=lambda t: t.get_views())[::-1]
     else:
         return redirect(to="home:home_page")
 

@@ -17,7 +17,7 @@
                             <img src="{{ set.image.url }}" width="200px">
                         </a>
                         <a class="name" href="{% url 'clothes:pledge_path' set.pledge.pk %}?color={{ set.color.slug }}">
-                            {{set.pledge.name}}
+                            {{set.pledge.name}} in {{set.color.name}}
                         </a>
                     </div>
                 {% endfor %}
