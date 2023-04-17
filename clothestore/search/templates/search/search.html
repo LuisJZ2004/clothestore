@@ -6,18 +6,18 @@
 
 {% block content %}
     <div class='container'>
-        {% if pledges or brands %}
+        {% if sets %}
             <div class="tittle">
                 <h1>Results of "{{ search }}"</h1>
             </div>
             <div class="pledges-container">
-                {% for pledge in pledges %}
+                {% for set in sets %}
                     <div class='product'>
-                        <a href="{% url 'clothes:pledge_path' pledge.pk %}">
-                            <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" width="200px">
+                        <a href="{% url 'clothes:pledge_path' set.pledge.pk %}?color={{ set.color.slug }}">
+                            <img src="{{ set.image.url }}" width="200px">
                         </a>
-                        <a class="name" href="{% url 'clothes:pledge_path' pledge.pk %}">
-                            {{pledge.name}}
+                        <a class="name" href="{% url 'clothes:pledge_path' set.pledge.pk %}?color={{ set.color.slug }}">
+                            {{set.pledge.name}}
                         </a>
                     </div>
                 {% endfor %}
