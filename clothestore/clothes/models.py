@@ -104,7 +104,7 @@ class IpAddress(models.Model):
 
 class PledgeColorSetVisualisation(models.Model):
     set = models.ForeignKey(to=PledgeColorSet, on_delete=models.CASCADE)
-    ip = models.ForeignKey(to=IpAddress, on_delete=models.PROTECT)
+    ip_address = models.ForeignKey(to=IpAddress, on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         return f"{self.ip_address} in {self.set.color.name} '{self.set.pledge.name}'"

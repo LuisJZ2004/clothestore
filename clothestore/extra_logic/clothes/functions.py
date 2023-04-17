@@ -41,11 +41,11 @@ def add_view(set: PledgeColorSet, remote_addr):
     Add a view to a pledgeset using ip addresses
     """
     try:
-        set.pledgecolorsetvisualisation_set.get(ip__ip_address=remote_addr)
+        set.pledgecolorsetvisualisation_set.get(ip_address__ip_address=remote_addr)
     except ObjectDoesNotExist:
         try:
             ip = IpAddress.objects.get(ip_address=remote_addr)
         except ObjectDoesNotExist:
             ip = IpAddress.objects.create(ip_address=remote_addr)
 
-        set.pledgecolorsetvisualisation_set.create(ip=ip)
+        set.pledgecolorsetvisualisation_set.create(ip_address=ip)
