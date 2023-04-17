@@ -13,33 +13,17 @@
     {% csrf_token %}
     {% comment %} Hiddens {% endcomment %}
     <input type="hidden" name="pledge" value={{ pledge.pk }}>
-    {% if pledgecolorset_selected %}
     <input id="prodId" name="color" type="hidden" value={{ pledgecolorset_selected.color.slug }}>
-    {% else %}
-    <input id="prodId" name="color" type="hidden" value={{ pledge.pledgecolorset_set.all.first.color.slug }}>
-    {% endif %}
 
     <div class="pledge-info">
+
+        <img src="{{ pledgecolorset_selected.image.url }}" width='280px'>
         
-        {% if pledgecolorset_selected %}
-            <img src="{{ pledgecolorset_selected.image.url }}" width='280px'>
-        {% else %}
-            <img src="{{ pledge.pledgecolorset_set.all.first.image.url }}" width='280px'>
-        {% endif %}
-        
-        {% if pledgecolorset_selected %}
-            <select name="size" class="sizes">
-                {% for size in pledgecolorset_selected.sizes.all %}
-                    <option value={{size.name}}>{{size.name}}</option>
-                {% endfor %}
-            </select>
-        {% else %}
-            <select name="size" class="sizes">
-                {% for size in pledge.pledgecolorset_set.all.first.sizes.all %}
-                    <option value={{size.name}}>{{size.name}}</option>
-                {% endfor %}
-            </select>
-        {% endif %}
+        <select name="size" class="sizes">
+            {% for size in pledgecolorset_selected.sizes.all %}
+                <option value={{size.name}}>{{size.name}}</option>
+            {% endfor %}
+        </select>
 
         <div class="pledge-color-sets">
             {% for set in pledgecolorsets %}
@@ -57,15 +41,11 @@
         <div class="extra_info">
             
             <ul>
-                {% if pledgecolorset_selected %}
-                    <li>price: {{ pledgecolorset_selected.price }}$</li>
-                {% else %}
-                    <li>price: {{ pledge.pledgecolorset_set.all.first.price }}$</li>
-                {% endif %}
+                <li>price: {{ pledgecolorset_selected.price }}$</li>
                 <li>brand: <a href="{% url 'brands:show_brand' pledge.brand.slug %}">{{ pledge.brand.name }}</a> </li>
                 <li>type: <a href="{% url 'clothes:pledge_list_path' pledge.gender pledge.clothing_type.slug %}">{{ pledge.clothing_type.name }}</a></li>
                 <li>gender: <a href="{% url 'clothes:clothes_by_gender' pledge.gender %}">{{ pledge.gender }}</a></li>
-                <li>added date: {{ pledge.pub_date }}</li>
+                <li>added date: {{ pledgecolorset_selected.pub_date.date }}</li>
                 
             </ul>
             <div class="pledge-description">

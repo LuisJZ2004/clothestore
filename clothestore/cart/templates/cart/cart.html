@@ -47,7 +47,7 @@
                     </div>
                     
                     <div class="name">
-                        <a href="{% url 'clothes:pledge_path' product.pledgecolorset.pledge.id %}?color={{product.pledgecolorset.color.name}}">
+                        <a href="{% url 'clothes:pledge_path' product.pledgecolorset.pledge.id %}?color={{product.pledgecolorset.color.slug}}">
                             <h2>{{ product.pledgecolorset.pledge.name }}</h2>
                         </a>
                     </div>
