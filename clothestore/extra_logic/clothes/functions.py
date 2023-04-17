@@ -1,4 +1,9 @@
+# Django
 from django.db.models import QuerySet
+from django.core.exceptions import ObjectDoesNotExist
+
+# My apps
+from clothes.models import PledgeColorSet, IpAddress
 
 def make_pagination(queryset: QuerySet, page_number: int, pagination_number: int):
     """
@@ -30,3 +35,17 @@ def remove_duplicates(queryset: list):
             final_list.append(element)
 
     return final_list
+
+def add_view(set: PledgeColorSet, remote_addr):
+    """
+    Add a view to a pledgeset using ip addresses
+    """
+    try:
+        set.pledgecolorsetvisualisation_set.get(ip__ip_address=remote_addr)
+    except ObjectDoesNotExist:
+        try:
+            ip = IpAddress.objects.get(ip_address=remote_addr)
+        except ObjectDoesNotExist:
+            ip = IpAddress.objects.create(ip_address=remote_addr)
+
+        set.pledgecolorsetvisualisation_set.create(ip=ip)

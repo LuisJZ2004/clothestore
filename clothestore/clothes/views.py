@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView
 from .models import ClothingType, Pledge, PledgeColorSet
 
 # My apps
-from extra_logic.clothes.functions import make_pagination, get_pagination_numbers, remove_duplicates
+from extra_logic.clothes.functions import make_pagination, get_pagination_numbers, add_view
 from extra_logic.clothes.classes import Filter, QuantityOfAField
 
 class ClothingTypeView(ListView):
@@ -186,6 +186,9 @@ class ShowPledge(DetailView):
         pledgecolorset_selected = None
         if self.color:
             pledgecolorset_selected = get_object_or_404(PledgeColorSet, pledge=self.get_object(), color__slug=self.color)
+        else:
+            pledgecolorset_selected = self.get_object().pledgecolorset_set.all().first()
+        add_view(pledgecolorset_selected, self.request.META["REMOTE_ADDR"])
 
         return {
             self.context_object_name: self.get_object(),
