@@ -95,3 +95,10 @@ class Color(models.Model):
     def save(self, *args, **kwargs) -> None:
         self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
+    
+class PledgeColorSetVisualisation(models.Model):
+    set = models.ForeignKey(to=PledgeColorSet, on_delete=models.CASCADE)
+    ip_address = models.GenericIPAddressField(blank=False, null=False)
+
+    def __str__(self) -> str:
+        return f"{self.ip_address} in {self.set.color.name} '{self.set.pledge.name}'"
