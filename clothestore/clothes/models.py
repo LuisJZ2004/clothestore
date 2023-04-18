@@ -67,8 +67,8 @@ class PledgeColorSet(models.Model):
     def __str__(self) -> str:
         return f" '{self.pledge.name}' in color '{self.color.name}' "
 
-    def get_views(self):
-        return len(self.pledgecolorsetvisualisation_set.all())
+    def get_succesful_purchases_number(self):
+        return len(self.succesfulpurchase_set.all())
 
 class Size(models.Model):
     """

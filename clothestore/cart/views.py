@@ -89,6 +89,7 @@ def payment_view(request):
                             "form": PaymentForm(),
                         }
                     )
+                request.user.cart.succesful_purchase()
                 request.user.cart.products.clear()
 
                 return render(request, 'cart/payment.html', {"confirm_message": True})

@@ -21,6 +21,14 @@ class Cart(models.Model):
             total_price += set.price
         
         return total_price
+    
+    def succesful_purchase(self):
+        """
+        Create SuccesfulPurchase models for each product in cart
+        """
+
+        for pledge in self.cartpledge_set.all():
+            pledge.pledgecolorset.succesfulpurchase_set.create(date=timezone.now().date())
 
 class CartPledge(models.Model):
     cart = models.ForeignKey(to=Cart, on_delete=models.CASCADE)
@@ -44,3 +52,6 @@ class SuccesfulPurchase(models.Model):
     pledgecolorset = models.ForeignKey(to=PledgeColorSet, on_delete=models.CASCADE)
 
     date = models.DateField(default=timezone.now().date())
+
+    def __str__(self) -> str:
+        return f"{self.pledgecolorset.pledge.name} sold in {self.date}" 
