@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
 
 # My apps
 from clothes.models import PledgeColorSet, Size
@@ -39,3 +40,7 @@ class CartPledge(models.Model):
         except ObjectDoesNotExist:
             return super().save(*args, **kwargs)
         
+class SuccesfulPurchase(models.Model):
+    pledgecolorset = models.ForeignKey(to=PledgeColorSet, on_delete=models.CASCADE)
+
+    date = models.DateField(default=timezone.now().date())

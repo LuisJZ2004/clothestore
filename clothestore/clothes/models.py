@@ -98,15 +98,15 @@ class Color(models.Model):
         self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
     
-class IpAddress(models.Model):
-    ip_address = models.GenericIPAddressField(blank=False, null=False)
+# class IpAddress(models.Model):
+#     ip_address = models.GenericIPAddressField(blank=False, null=False)
 
-    def __str__(self) -> str:
-        return self.ip_address
+#     def __str__(self) -> str:
+#         return self.ip_address
 
-class PledgeColorSetVisualisation(models.Model):
-    set = models.ForeignKey(to=PledgeColorSet, on_delete=models.CASCADE)
-    ip_address = models.ForeignKey(to=IpAddress, on_delete=models.PROTECT)
+# class PledgeColorSetVisualisation(models.Model):
+#     set = models.ForeignKey(to=PledgeColorSet, on_delete=models.CASCADE)
+#     ip_address = models.ForeignKey(to=IpAddress, on_delete=models.PROTECT)
 
-    def __str__(self) -> str:
-        return f"{self.ip_address} in {self.set.color.name} '{self.set.pledge.name}'"
+#     def __str__(self) -> str:
+#         return f"{self.ip_address} in {self.set.color.name} '{self.set.pledge.name}'"
